@@ -9,6 +9,7 @@ Loads monthly shelter flow data (2018–2026) and produces:
 
 import io
 from pathlib import Path
+from typing import Union, Optional
 
 import numpy as np
 import pandas as pd
@@ -115,12 +116,12 @@ def _annualize_occupancy(df: pd.DataFrame) -> pd.DataFrame:
     return yearly
 
 
-def load_occupancy_yearly(local_dir: str | Path = "source_data") -> pd.DataFrame:
+def load_occupancy_yearly(local_dir: Union[str, Path] = "source_data") -> pd.DataFrame:
     base = Path(local_dir)
     if not base.exists():
         return pd.DataFrame()
 
-    files: list[Path] = []
+    files: list = []
     for pattern in OCCUPANCY_GLOBS:
         files.extend(sorted(base.glob(pattern)))
 
@@ -143,7 +144,7 @@ def load_occupancy_yearly(local_dir: str | Path = "source_data") -> pd.DataFrame
     return merged
 
 
-def load_flow(local_path: str | Path | None = None) -> pd.DataFrame:
+def load_flow(local_path: Optional[Union[str, Path]] = None) -> pd.DataFrame:
     occupancy_yearly = load_occupancy_yearly("source_data")
 
     if local_path is not None:
