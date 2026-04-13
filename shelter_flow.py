@@ -84,20 +84,25 @@ def _annualize_occupancy(df: pd.DataFrame) -> pd.DataFrame:
     if work.empty:
         return pd.DataFrame()
 
+    def _series_or_zeros(column_name: str) -> pd.Series:
+        if column_name in work.columns:
+            return pd.to_numeric(work[column_name], errors="coerce").fillna(0)
+        return pd.Series(0, index=work.index, dtype=float)
+
     if "SERVICE_USER_COUNT" in work.columns:
-        people = pd.to_numeric(work["SERVICE_USER_COUNT"], errors="coerce").fillna(0)
+        people = _series_or_zeros("SERVICE_USER_COUNT")
     elif "OCCUPANCY" in work.columns:
-        people = pd.to_numeric(work["OCCUPANCY"], errors="coerce").fillna(0)
+        people = _series_or_zeros("OCCUPANCY")
     else:
-        beds = pd.to_numeric(work.get("OCCUPIED_BEDS", 0), errors="coerce").fillna(0)
-        rooms = pd.to_numeric(work.get("OCCUPIED_ROOMS", 0), errors="coerce").fillna(0)
+        beds = _series_or_zeros("OCCUPIED_BEDS")
+        rooms = _series_or_zeros("OCCUPIED_ROOMS")
         people = beds + rooms
 
     if "CAPACITY" in work.columns:
-        cap = pd.to_numeric(work["CAPACITY"], errors="coerce").fillna(0)
+        cap = _series_or_zeros("CAPACITY")
     else:
-        bed_cap = pd.to_numeric(work.get("CAPACITY_ACTUAL_BED", 0), errors="coerce").fillna(0)
-        room_cap = pd.to_numeric(work.get("CAPACITY_ACTUAL_ROOM", 0), errors="coerce").fillna(0)
+        bed_cap = _series_or_zeros("CAPACITY_ACTUAL_BED")
+        room_cap = _series_or_zeros("CAPACITY_ACTUAL_ROOM")
         cap = bed_cap + room_cap
 
     daily = pd.DataFrame({
@@ -239,8 +244,42 @@ def calibrate_agg_df(agg_df: pd.DataFrame, flow_yearly: pd.DataFrame) -> pd.Data
     agg = agg_df.copy()
     flow = flow_yearly.copy()
 
-    flow_first_year = int(flow.index.min())
+    def _to_num(value: object) -> float:
+        return pd.to_numeric(pd.Series([value]), errors="coerce").iloc[0]
+
+    def _valid_numeric(value: object, target_col: str) -> bool:
+        num = _to_num(value)
+        if pd.isna(num) or not np.isfinite(float(num)):
+            return False
+        if target_col.startswith("pct_"):
+            return float(num) > 0
+        if target_col in {"age_avg", "total_surveyed"}:
+            return float(num) > 0
+        return True
+
     all_years = sorted(agg.index.tolist())
+
+    default_unsheltered_share = 0.18
+    if "pct_outdoor_sleeping" in agg.columns:
+        outdoor_series = pd.to_numeric(agg["pct_outdoor_sleeping"], errors="coerce")
+        valid_outdoor = outdoor_series[(outdoor_series > 0.02) & (outdoor_series < 0.60)]
+        if not valid_outdoor.empty:
+            default_unsheltered_share = float(np.clip(valid_outdoor.median(), 0.08, 0.40))
+
+    def _unsheltered_share_for_year(year: int) -> float:
+        if "pct_outdoor_sleeping" in agg.columns and year in agg.index:
+            year_val = _to_num(agg.loc[year, "pct_outdoor_sleeping"])
+            if pd.notna(year_val) and np.isfinite(float(year_val)) and 0.02 < float(year_val) < 0.60:
+                return float(np.clip(float(year_val), 0.08, 0.40))
+        return default_unsheltered_share
+
+    def _total_from_sheltered(year: int, sheltered_value: object) -> float:
+        sheltered = _to_num(sheltered_value)
+        if pd.isna(sheltered) or not np.isfinite(float(sheltered)) or float(sheltered) <= 0:
+            return np.nan
+        unsheltered_share = _unsheltered_share_for_year(year)
+        sheltered_share = max(1.0 - unsheltered_share, 0.50)
+        return float(sheltered / sheltered_share)
 
     overwrite_map = {
         "total_surveyed": "actively_homeless",
@@ -250,58 +289,147 @@ def calibrate_agg_df(agg_df: pd.DataFrame, flow_yearly: pd.DataFrame) -> pd.Data
         "age_avg": "age_avg_flow",
         "pct_chronic": "pct_chronic_flow",
         "pct_indigenous": "pct_indigenous_flow",
+        "pct_youth": "pct_youth_flow",
     }
 
-    for agg_col in overwrite_map:
+    alias_targets = {
+        "pct_tnb": "pct_trans_nonbinary",
+    }
+    for flow_col in flow.columns:
+        if not str(flow_col).endswith("_flow"):
+            continue
+        base = str(flow_col)[:-5]
+        target = alias_targets.get(base, base)
+        if target in agg.columns and target not in overwrite_map:
+            overwrite_map[target] = str(flow_col)
+
+    for agg_col in overwrite_map.keys():
         if agg_col in agg.columns:
             agg[agg_col] = pd.to_numeric(agg[agg_col], errors="coerce").astype(float)
 
     for yr in all_years:
-        if yr in flow.index:
-            for agg_col, flow_col in overwrite_map.items():
-                if flow_col in flow.columns and agg_col in agg.columns:
-                    val = flow.loc[yr, flow_col]
-                    if pd.notna(val):
-                        agg.loc[yr, agg_col] = val
+        if yr not in flow.index:
+            continue
 
-            if "age_pct_under16" in flow.columns and "age_pct_16_24" in flow.columns:
-                under16 = pd.to_numeric(flow.loc[[yr], "age_pct_under16"], errors="coerce").iloc[0]
-                age16_24 = pd.to_numeric(flow.loc[[yr], "age_pct_16_24"], errors="coerce").iloc[0]
-                pct_youth = float(under16 + age16_24)
-                agg.loc[yr, "pct_youth"] = float(np.clip(pct_youth, 0.01, 0.99))
-
-    pre_flow_years = [yr for yr in all_years if yr < flow_first_year]
-    if pre_flow_years:
-        slope_window = sorted([yr for yr in flow.index if yr <= flow_first_year + 2])
         for agg_col, flow_col in overwrite_map.items():
             if flow_col not in flow.columns or agg_col not in agg.columns:
                 continue
+            val = flow.loc[yr, flow_col]
+            if agg_col == "total_surveyed":
+                est_total = _total_from_sheltered(yr, val)
+                if _valid_numeric(est_total, agg_col):
+                    agg.loc[yr, agg_col] = est_total
+            elif _valid_numeric(val, agg_col):
+                agg.loc[yr, agg_col] = float(_to_num(val))
 
-            flow_vals = flow.loc[slope_window, flow_col].dropna()
-            if len(flow_vals) < 2:
-                continue
+        if (
+            "pct_youth" in agg.columns
+            and "pct_youth_flow" not in flow.columns
+            and "age_pct_under16" in flow.columns
+            and "age_pct_16_24" in flow.columns
+        ):
+            under16 = _to_num(flow.loc[yr, "age_pct_under16"])
+            age16_24 = _to_num(flow.loc[yr, "age_pct_16_24"])
+            if pd.notna(under16) and pd.notna(age16_24):
+                pct_youth = float(under16 + age16_24)
+                if np.isfinite(pct_youth) and pct_youth > 0:
+                    agg.loc[yr, "pct_youth"] = float(np.clip(pct_youth, 0.01, 0.99))
 
-            xs = np.array(flow_vals.index, dtype=float)
-            ys = np.asarray(flow_vals.values, dtype=float)
-            slope = np.polyfit(xs, ys, 1)[0]
-            anchor_val = float(pd.to_numeric(flow.loc[[flow_first_year], flow_col], errors="coerce").iloc[0])
+    for agg_col, flow_col in overwrite_map.items():
+        if flow_col not in flow.columns or agg_col not in agg.columns:
+            continue
 
-            for yr in pre_flow_years:
-                extrapolated = anchor_val + slope * (yr - flow_first_year)
-                if agg_col.startswith("pct_"):
-                    extrapolated = float(np.clip(extrapolated, 0.01, 0.99))
-                elif agg_col == "age_avg":
-                    extrapolated = float(np.clip(extrapolated, 15, 85))
+        series = pd.to_numeric(flow[flow_col], errors="coerce")
+        valid_years = [
+            int(float(y))
+            for y, v in series.items()
+            if _valid_numeric(v, agg_col) and pd.notna(pd.to_numeric(pd.Series([y]), errors="coerce").iloc[0])
+        ]
+        if len(valid_years) < 2:
+            continue
+
+        first_valid_year = min(valid_years)
+        pre_flow_years = [yr for yr in all_years if yr < first_valid_year]
+        if not pre_flow_years:
+            continue
+
+        slope_window = sorted([yr for yr in valid_years if first_valid_year <= yr <= first_valid_year + 2])
+        if len(slope_window) < 2:
+            slope_window = sorted(valid_years[:3])
+        if len(slope_window) < 2:
+            continue
+
+        flow_vals = pd.to_numeric(flow.loc[slope_window, flow_col], errors="coerce").dropna()
+        if len(flow_vals) < 2:
+            continue
+
+        xs = np.array(flow_vals.index, dtype=float)
+        ys = np.asarray(flow_vals.values, dtype=float)
+        slope = np.polyfit(xs, ys, 1)[0]
+        anchor_val = float(_to_num(flow.loc[first_valid_year, flow_col]))
+        if not _valid_numeric(anchor_val, agg_col):
+            continue
+
+        for yr in pre_flow_years:
+            extrapolated = anchor_val + slope * (yr - first_valid_year)
+            if agg_col.startswith("pct_"):
+                extrapolated = float(np.clip(extrapolated, 0.01, 0.99))
+            elif agg_col == "age_avg":
+                extrapolated = float(np.clip(extrapolated, 15.0, 85.0))
+            if agg_col == "total_surveyed":
+                est_total = _total_from_sheltered(yr, extrapolated)
+                if _valid_numeric(est_total, agg_col):
+                    agg.loc[yr, agg_col] = est_total
+            elif _valid_numeric(extrapolated, agg_col):
                 agg.loc[yr, agg_col] = extrapolated
 
-        if "age_pct_under16" in flow.columns and "age_pct_16_24" in flow.columns:
-            anchor_under16 = pd.to_numeric(flow.loc[[flow_first_year], "age_pct_under16"], errors="coerce").iloc[0]
-            anchor_16_24 = pd.to_numeric(flow.loc[[flow_first_year], "age_pct_16_24"], errors="coerce").iloc[0]
-            anchor_youth = float(anchor_under16 + anchor_16_24)
-            for yr in pre_flow_years:
+    if (
+        "pct_youth" in agg.columns
+        and "pct_youth_flow" not in flow.columns
+        and "age_pct_under16" in flow.columns
+        and "age_pct_16_24" in flow.columns
+    ):
+        youth_series = pd.to_numeric(flow["age_pct_under16"], errors="coerce") + pd.to_numeric(
+            flow["age_pct_16_24"], errors="coerce"
+        )
+        youth_valid_years = [
+            int(float(y))
+            for y, v in youth_series.items()
+            if pd.notna(v)
+            and np.isfinite(v)
+            and float(v) > 0
+            and pd.notna(pd.to_numeric(pd.Series([y]), errors="coerce").iloc[0])
+        ]
+        if youth_valid_years:
+            first_youth_year = min(youth_valid_years)
+            pre_youth_years = [yr for yr in all_years if yr < first_youth_year]
+            anchor_youth = float(youth_series.loc[first_youth_year])
+            for yr in pre_youth_years:
                 agg.loc[yr, "pct_youth"] = float(np.clip(anchor_youth, 0.01, 0.99))
 
-    agg["total_surveyed"] = agg["total_surveyed"].round().astype(int)
+    if "total_surveyed" in agg.columns:
+        agg["total_surveyed"] = pd.to_numeric(agg["total_surveyed"], errors="coerce").round().fillna(0).astype(int)
+
+    # Enforce composition constraints so grouped proportions sum to ~1.0.
+    # This also guarantees pct_white exists for downstream diagnostics.
+    for col in ["pct_male", "pct_female", "pct_trans_nonbinary", "pct_black", "pct_white", "pct_indigenous", "pct_other_race"]:
+        if col not in agg.columns:
+            agg[col] = 0.0
+        agg[col] = pd.to_numeric(agg[col], errors="coerce").fillna(0.0).clip(lower=0.0)
+
+    for yr in agg.index:
+        g_cols = ["pct_male", "pct_female", "pct_trans_nonbinary"]
+        g_vals = agg.loc[yr, g_cols].astype(float)
+        g_sum = float(g_vals.sum())
+        if np.isfinite(g_sum) and g_sum > 0:
+            agg.loc[yr, g_cols] = (g_vals / g_sum).values
+
+        r_cols = ["pct_black", "pct_white", "pct_indigenous", "pct_other_race"]
+        r_vals = agg.loc[yr, r_cols].astype(float)
+        r_sum = float(r_vals.sum())
+        if np.isfinite(r_sum) and r_sum > 0:
+            agg.loc[yr, r_cols] = (r_vals / r_sum).values
+
     return agg
 
 

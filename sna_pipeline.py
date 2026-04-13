@@ -98,6 +98,7 @@ RATIO_MAP = {
     ("n_first_nations", "indigenous_count"): "pct_first_nations",
     ("n_metis", "indigenous_count"): "pct_metis",
     ("n_inuit", "indigenous_count"): "pct_inuit",
+    ("n_white", "race_count"): "pct_white",
     ("n_mental_health", "health_count"): "pct_mental_health",
     ("n_substance_use", "health_count"): "pct_substance_use",
     ("n_physical_health", "health_count"): "pct_physical_health",
