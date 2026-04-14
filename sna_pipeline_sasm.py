@@ -21,7 +21,7 @@ directly comparable.
 
 Usage:
     python sna_pipeline_sasm.py --local --local-flow source_data/toronto-shelter-system-flow.csv
-    # Default: 2000 synthetic individuals per year (fixed sample size)
+    # Default: observed totals (typically ~100k+ rows across all years)
     
     python sna_pipeline_sasm.py --local --local-flow source_data/toronto-shelter-system-flow.csv --use-observed-totals
     # Generate individuals matching actual observed totals (~6400-8000 per year)
@@ -29,8 +29,8 @@ Usage:
     python sna_pipeline_sasm.py --local --use-observed-totals --skip-model
     # Generate synthetic data only without training the forecasting model
     
-    python sna_pipeline_sasm.py --local --sample-size 5000
-    # Use custom fixed sample size (5000 instead of default 2000)
+    # NOTE: Fixed sample-size mode has been removed.
+    # SASM now always uses observed/calibrated totals.
 """
 
 import argparse
@@ -43,15 +43,18 @@ import joblib
 import numpy as np
 import pandas as pd
 import requests
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.linear_model import Ridge
-from sklearn.metrics import mean_absolute_error, r2_score
-from sklearn.model_selection import LeaveOneOut
-from sklearn.preprocessing import StandardScaler
+from sklearn.compose import ColumnTransformer
+from sklearn.metrics import f1_score, mean_absolute_error, mean_squared_error
+from sklearn.multioutput import MultiOutputClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder
+
+from xgboost import XGBClassifier
 
 # Import the SASM generator (new) and shelter flow module (shared)
 from sasm_generator import generate_individuals_sasm
 from shelter_flow import load_flow, calibrate_agg_df, enrich_region_year
+from visualization.results_visualization import create_plots
 
 warnings.filterwarnings("ignore")
 np.random.seed(42)
@@ -474,9 +477,15 @@ def build_region_year(df_ind: pd.DataFrame, agg_df: pd.DataFrame) -> pd.DataFram
     ).reset_index()
 
     # Physical health not in SASM optimization — pull from calibrated agg_df
-    ry["pct_physical_health"] = ry["year"].map(
-        lambda y: float(agg_df.loc[y, "pct_physical_health"]) if y in agg_df.index else 0.33
-    )
+    phys_health_lookup = pd.to_numeric(agg_df["pct_physical_health"], errors="coerce").to_dict()
+    ry["year"] = pd.to_numeric(ry["year"], errors="coerce").astype(int)
+    phys_health_df = pd.DataFrame({
+        "year": list(phys_health_lookup.keys()),
+        "pct_physical_health_lookup": list(phys_health_lookup.values()),
+    })
+    ry = ry.merge(phys_health_df, on="year", how="left")
+    ry["pct_physical_health"] = ry["pct_physical_health_lookup"].fillna(0.33)
+    ry = ry.drop(columns=["pct_physical_health_lookup"])
 
     # True total from calibrated agg_df (shelter flow anchored)
     total_lookup = (
@@ -490,63 +499,103 @@ def build_region_year(df_ind: pd.DataFrame, agg_df: pd.DataFrame) -> pd.DataFram
 
 
 # ── FORECASTING MODEL ─────────────────────────────────────────────────────────
-# Identical to old pipeline — same models, same CV strategy
+# Train on individual-level synthetic rows and predict detailed yearly outcomes.
 
-def train_and_forecast(ry: pd.DataFrame, observed_years: list, forecast_years: list):
-    train_df   = ry[ry["year"] <= max(observed_years)].copy()
-    predict_df = ry[ry["year"].isin(forecast_years)].copy()
+INDIVIDUAL_NUM_FEATURES = ["year", "age", "years_homeless", "youth", "indigenous_flag"]
+INDIVIDUAL_CAT_FEATURES = ["gender", "race", "shelter_type"]
+DETAIL_TARGETS = [
+    "mental_health",
+    "substance_use",
+    "outdoor_sleeping",
+    "chronic_homeless",
+    "lgbtq",
+    "immigrant",
+    "foster_care_history",
+    "incarceration_history",
+    "no_income",
+    "housing_loss_income",
+    "housing_loss_health",
+]
 
-    scaler     = StandardScaler()
-    X_train_sc = scaler.fit_transform(train_df[FEATURE_COLS].values)
-    y_train    = train_df["true_total"].values.astype(float)
 
-    ridge = Ridge(alpha=10.0)
-    ridge.fit(X_train_sc, y_train)
-
-    gbr = GradientBoostingRegressor(
-        n_estimators=200, max_depth=2,
-        learning_rate=0.05, subsample=0.8, random_state=42,
+def _build_individual_model() -> MultiOutputClassifier:
+    base_estimator = XGBClassifier(
+        n_estimators=180,
+        max_depth=4,
+        learning_rate=0.05,
+        subsample=0.85,
+        colsample_bytree=0.85,
+        reg_alpha=0.0,
+        reg_lambda=1.0,
+        random_state=42,
+        n_jobs=4,
+        tree_method="hist",
+        eval_metric="logloss",
     )
-    gbr.fit(X_train_sc, y_train)
+    return MultiOutputClassifier(base_estimator)
 
-    # LOO-CV on real anchor years only
-    obs_mask = train_df["year"].isin(observed_years)
-    X_obs    = scaler.transform(train_df.loc[obs_mask, FEATURE_COLS].values)
-    y_obs    = train_df.loc[obs_mask, "true_total"].values.astype(float)
 
-    loo = LeaveOneOut()
-    ridge_loo, gbr_loo = [], []
-    for tr_idx, te_idx in loo.split(X_obs):
-        r = Ridge(alpha=10.0).fit(X_obs[tr_idx], y_obs[tr_idx])
-        g = GradientBoostingRegressor(n_estimators=200, max_depth=2,
-                                      learning_rate=0.05, random_state=42)
-        g.fit(X_obs[tr_idx], y_obs[tr_idx])
-        ridge_loo.append(r.predict(X_obs[te_idx])[0])
-        gbr_loo.append(g.predict(X_obs[te_idx])[0])
+def train_and_forecast(df_individuals: pd.DataFrame, observed_years: list, forecast_years: list):
+    train_cutoff = min(forecast_years) - 1
+    train_df = df_individuals[df_individuals["year"] <= train_cutoff].copy()
 
-    print("\nLOO-CV on observed years (SASM pipeline):")
-    print(f"  Ridge  MAE: {mean_absolute_error(y_obs, ridge_loo):,.0f}  R²: {r2_score(y_obs, ridge_loo):.3f}")
-    print(f"  GBR    MAE: {mean_absolute_error(y_obs, gbr_loo):,.0f}  R²: {r2_score(y_obs, gbr_loo):.3f}")
+    model = _build_individual_model()
+    train_features = train_df[INDIVIDUAL_NUM_FEATURES + INDIVIDUAL_CAT_FEATURES].reset_index(drop=True)
+    all_features = df_individuals[INDIVIDUAL_NUM_FEATURES + INDIVIDUAL_CAT_FEATURES].reset_index(drop=True)
+    combined_features = pd.concat([train_features, all_features], ignore_index=True)
+    combined_features = pd.get_dummies(combined_features, columns=INDIVIDUAL_CAT_FEATURES, dtype=float)
+    X_train = combined_features.iloc[: len(train_features)].reset_index(drop=True)
+    y_train = train_df[DETAIL_TARGETS].astype(int)
+    model.fit(X_train, y_train)
 
-    all_X_sc      = scaler.transform(ry[FEATURE_COLS].values)
-    results       = ry[["year", "true_total"]].copy()
-    results["ridge_pred"] = ridge.predict(all_X_sc).round(0).astype(int)
-    results["gbr_pred"]   = gbr.predict(all_X_sc).round(0).astype(int)
-    results["ensemble"]   = ((results["ridge_pred"] + results["gbr_pred"]) / 2).round(0).astype(int)
-    results["observed"]   = results["year"].isin(observed_years)
+    all_df = df_individuals[INDIVIDUAL_NUM_FEATURES + INDIVIDUAL_CAT_FEATURES + DETAIL_TARGETS].copy().reset_index(drop=True)
+    X_all = combined_features.iloc[len(train_features):].reset_index(drop=True)
+    all_proba = model.predict_proba(X_all)
 
-    future = results[results["year"].isin(forecast_years)][["year","ridge_pred","gbr_pred","ensemble"]]
-    print("\nForecast for future years (SASM pipeline):")
-    print(future.to_string(index=False))
+    # Aggregate predictions back to yearly counts/rates.
+    results = []
+    for year in sorted(all_df["year"].unique()):
+        year_mask = all_df["year"] == year
+        year_actual = all_df.loc[year_mask, DETAIL_TARGETS]
+        year_pred_probs = np.column_stack([
+            probs[year_mask.to_numpy(), 1] for probs in all_proba
+        ])
 
-    imp = pd.DataFrame({
-        "feature":    FEATURE_COLS,
-        "importance": gbr.feature_importances_,
-    }).sort_values("importance", ascending=False)
-    print("\nTop feature importances (GBR, SASM pipeline):")
-    print(imp.to_string(index=False))
+        row = {"year": year, "actual_total": int(year_mask.sum())}
+        for idx, target in enumerate(DETAIL_TARGETS):
+            actual_count = int(year_actual[target].sum())
+            pred_count = float(year_pred_probs[:, idx].sum())
+            row[f"actual_{target}_count"] = actual_count
+            row[f"actual_{target}_rate"] = actual_count / max(int(year_mask.sum()), 1)
+            row[f"pred_{target}_count"] = round(pred_count, 1)
+            row[f"pred_{target}_rate"] = round(pred_count / max(int(year_mask.sum()), 1), 4)
+        results.append(row)
 
-    return results, ridge, gbr, scaler
+    results_df = pd.DataFrame(results)
+    results_df["observed"] = results_df["year"].isin(observed_years)
+    results_df["true_total"] = results_df["actual_total"]
+
+    print("\nDetailed XGBoost forecast on individual-level SASM data:")
+    summary_rows = []
+    for target in DETAIL_TARGETS:
+        forecast_subset = results_df[results_df["year"].isin(forecast_years)]
+        mae = mean_absolute_error(forecast_subset[f"actual_{target}_count"], forecast_subset[f"pred_{target}_count"])
+        rmse = float(np.sqrt(mean_squared_error(
+            forecast_subset[f"actual_{target}_count"],
+            forecast_subset[f"pred_{target}_count"],
+        )))
+        summary_rows.append({"target": target, "MAE": mae, "RMSE": rmse})
+    summary = pd.DataFrame(summary_rows).sort_values("MAE")
+    print(summary.to_string(index=False))
+
+    detailed_examples = results_df[results_df["year"].isin(forecast_years)][["year", "actual_total"] + [f"pred_{t}_count" for t in DETAIL_TARGETS[:4]]]
+    print("\nForecast totals + detailed outputs (first targets shown):")
+    print(detailed_examples.to_string(index=False))
+
+    print("\nTop-level individual feature set used for XGBoost:")
+    print(pd.DataFrame({"feature": INDIVIDUAL_NUM_FEATURES + INDIVIDUAL_CAT_FEATURES}).to_string(index=False))
+
+    return results_df, model
 
 
 # ── MAIN ──────────────────────────────────────────────────────────────────────
@@ -559,10 +608,6 @@ def main():
                         help="Path to local shelter flow CSV")
     parser.add_argument("--skip-model", action="store_true",
                         help="Generate synthetic data only, skip model training")
-    parser.add_argument("--sample-size", type=int, default=2000, metavar="N",
-                        help="Synthetic individuals per year (default: 2000, ignored if --use-observed-totals)")
-    parser.add_argument("--use-observed-totals", action="store_true",
-                        help="Use actual observed totals from calibrated aggregates instead of fixed sample-size")
     args = parser.parse_args()
 
     ALL_YEARS      = list(range(2013, 2027))
@@ -599,13 +644,9 @@ def main():
     print("\n" + "=" * 65)
     print("STEP 3: SASM optimization-based individual generation")
     print("  (minimize ||WX' - Y||² per year)")
-    if args.use_observed_totals:
-        print("  Using OBSERVED totals from shelter flow data")
-    else:
-        print(f"  Using fixed sample size: {args.sample_size} per year")
+    print("  Using OBSERVED totals from shelter flow data")
     print("=" * 65)
-    df_individuals = generate_individuals_sasm(agg_df, sample_size=args.sample_size, 
-                                               use_observed_totals=args.use_observed_totals)
+    df_individuals = generate_individuals_sasm(agg_df, use_observed_totals=True)
     df_individuals.to_csv("sasm_synthetic_individuals.csv", index=False)
     print(f"\nSaved sasm_synthetic_individuals.csv  ({len(df_individuals):,} rows)")
 
@@ -619,6 +660,8 @@ def main():
     print("Saved sasm_region_year_features.csv")
 
     if args.skip_model:
+        create_plots(agg_df, ry, "synthetic_data/sasm_plots", forecast_results=None)
+        print("Saved plots to synthetic_data/sasm_plots")
         print("\n--skip-model set, done.")
         return
 
@@ -626,30 +669,29 @@ def main():
     print("\n" + "=" * 65)
     print("STEP 5: Training forecasting model")
     print("=" * 65)
-    flow_years     = sorted(flow_yearly.index.tolist())
-    all_anchor_yrs = sorted(set(observed.keys()) | set(flow_years))
+    all_anchor_yrs = sorted(observed.keys())
 
-    results, ridge, gbr, scaler = train_and_forecast(ry, all_anchor_yrs, FORECAST_YEARS)
+    results, model = train_and_forecast(df_individuals, all_anchor_yrs, FORECAST_YEARS)
+    # Keep observed marker for display as true SNA anchor years only.
+    results["observed"] = results["year"].isin(sorted(observed.keys()))
     results.to_csv("sasm_forecast_results.csv", index=False)
     print("\nSaved sasm_forecast_results.csv")
     
     # Save trained models for later use
-    joblib.dump(ridge, "sasm_ridge_model.pkl")
-    joblib.dump(gbr, "sasm_gbr_model.pkl")
-    joblib.dump(scaler, "sasm_scaler.pkl")
-    print("Saved sasm_ridge_model.pkl")
-    print("Saved sasm_gbr_model.pkl")
-    print("Saved sasm_scaler.pkl")
+    joblib.dump(model, "sasm_xgboost_detailed_model.pkl")
+    print("Saved sasm_xgboost_detailed_model.pkl")
+
+    create_plots(agg_df, ry, "synthetic_data/sasm_plots", forecast_results=results)
+    print("Saved plots to synthetic_data/sasm_plots")
 
     print("\n" + "=" * 65)
     print("ALL OUTPUTS (SASM pipeline):")
     print("  sasm_synthetic_individuals.csv  — individual-level synthetic data")
     print("  sasm_region_year_features.csv   — region-year model features")
-    print("  sasm_forecast_results.csv       — model predictions 2013–2026")
+    print("  sasm_forecast_results.csv       — detailed model predictions by year")
     print("  sasm_quality_log.csv            — d_p quality metric per year")
-    print("  sasm_ridge_model.pkl            — Ridge regression model (for predictions)")
-    print("  sasm_gbr_model.pkl              — Gradient boosting model (for predictions)")
-    print("  sasm_scaler.pkl                 — Feature scaler (for predictions)")
+    print("  sasm_xgboost_detailed_model.pkl — XGBoost detailed prediction model")
+    print("  synthetic_data/sasm_plots/*     — SASM visualization charts")
     print("=" * 65)
 
 

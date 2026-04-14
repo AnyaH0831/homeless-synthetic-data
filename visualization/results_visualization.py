@@ -51,25 +51,60 @@ def create_plots(
 
     if forecast_results is not None and not forecast_results.empty:
         fr = forecast_results.sort_values("year").copy()
+        total_col = None
+        pred_total_col = None
+        for candidate in ("true_total", "actual_total"):
+            if candidate in fr.columns:
+                total_col = candidate
+                break
+        for candidate in ("pred_total", "ensemble", "gbr_pred"):
+            if candidate in fr.columns:
+                pred_total_col = candidate
+                break
 
-        plt.figure(figsize=(9, 4.5))
-        plt.plot(fr["year"], fr["true_total"], marker="o", label="True Total")
-        plt.plot(fr["year"], fr["ridge_pred"], marker="o", label="Ridge")
-        plt.plot(fr["year"], fr["gbr_pred"], marker="o", label="GBR")
-        plt.plot(fr["year"], fr["ensemble"], marker="o", label="Ensemble")
-        plt.title("True vs Predicted Totals")
-        plt.xlabel("Year")
-        plt.ylabel("Individuals")
-        plt.legend()
-        _save_plot(out / "true_vs_predicted_totals.png", plt)
-
-        observed = fr[fr["observed"] == True].copy()
-        if not observed.empty:
-            observed["ensemble_error"] = observed["ensemble"] - observed["true_total"]
+        if total_col is not None:
             plt.figure(figsize=(9, 4.5))
-            plt.bar(observed["year"].astype(str), observed["ensemble_error"])
-            plt.axhline(0, color="black", linewidth=1)
-            plt.title("Observed-Year Ensemble Error")
+            plt.plot(fr["year"], fr[total_col], marker="o", label="Actual Total")
+            if pred_total_col is not None:
+                plt.plot(fr["year"], fr[pred_total_col], marker="o", label="Predicted Total")
+            plt.title("Total Individuals by Year")
             plt.xlabel("Year")
-            plt.ylabel("Prediction Error")
-            _save_plot(out / "observed_ensemble_error.png", plt)
+            plt.ylabel("Individuals")
+            plt.legend()
+            _save_plot(out / "total_individuals_comparison.png", plt)
+
+        detailed_targets = []
+        for target in ["mental_health", "substance_use", "outdoor_sleeping", "chronic_homeless", "lgbtq", "immigrant"]:
+            actual_col = f"actual_{target}_count"
+            pred_col = f"pred_{target}_count"
+            if actual_col in fr.columns and pred_col in fr.columns:
+                detailed_targets.append(target)
+
+        if detailed_targets:
+            fig, axes = plt.subplots(len(detailed_targets), 1, figsize=(10, 3.2 * len(detailed_targets)), sharex=True)
+            if len(detailed_targets) == 1:
+                axes = [axes]
+            for ax, target in zip(axes, detailed_targets):
+                actual_col = f"actual_{target}_count"
+                pred_col = f"pred_{target}_count"
+                ax.plot(fr["year"], fr[actual_col], marker="o", label=f"Actual {target}")
+                ax.plot(fr["year"], fr[pred_col], marker="o", label=f"Predicted {target}")
+                ax.set_title(target.replace("_", " ").title())
+                ax.set_ylabel("Count")
+                ax.legend(loc="best")
+            axes[-1].set_xlabel("Year")
+            _save_plot(out / "detailed_attribute_counts.png", plt)
+
+            fig, axes = plt.subplots(len(detailed_targets), 1, figsize=(10, 3.2 * len(detailed_targets)), sharex=True)
+            if len(detailed_targets) == 1:
+                axes = [axes]
+            for ax, target in zip(axes, detailed_targets):
+                actual_col = f"actual_{target}_rate"
+                pred_col = f"pred_{target}_rate"
+                ax.plot(fr["year"], fr[actual_col], marker="o", label=f"Actual {target}")
+                ax.plot(fr["year"], fr[pred_col], marker="o", label=f"Predicted {target}")
+                ax.set_title(f"{target.replace('_', ' ').title()} Rate")
+                ax.set_ylabel("Rate")
+                ax.legend(loc="best")
+            axes[-1].set_xlabel("Year")
+            _save_plot(out / "detailed_attribute_rates.png", plt)

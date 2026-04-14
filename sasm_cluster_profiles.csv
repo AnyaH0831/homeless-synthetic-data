@@ -1,0 +1,7 @@
+cluster,age,years_homeless,youth,indigenous_flag,mental_health,substance_use,outdoor_sleeping,chronic_homeless,lgbtq,immigrant,foster_care_history,incarceration_history,no_income,housing_loss_income,housing_loss_health,n_total,pct_of_total,dominant_gender,dominant_race,dominant_shelter,label
+0,34.381,2.297,0.275,1.0,0.355,0.179,0.047,0.17,0.023,0.051,0.163,0.134,0.0,0.087,0.024,18474,11.4,male,indigenous,emergency_shelter,[0] Indigenous / Sheltered
+1,39.461,8.506,0.16,0.09,0.59,0.43,0.346,0.57,0.175,0.336,0.36,0.303,1.0,0.536,0.188,9222,5.7,male,white,emergency_shelter,[1] Sheltered / Mental Health / Chronic
+2,18.591,1.759,1.0,0.0,0.443,0.283,0.152,0.149,0.015,0.038,0.155,0.121,0.0,0.061,0.017,23663,14.6,male,other,emergency_shelter,[2] Youth / Sheltered
+3,41.661,10.544,0.077,0.03,0.602,0.463,0.002,0.716,0.151,0.352,0.257,0.198,0.0,0.54,0.188,31786,19.6,male,white,emergency_shelter,[3] Sheltered / Dual-Diagnosis / Chronic
+4,40.396,1.519,0.0,0.0,0.475,0.288,0.0,0.203,0.007,0.015,0.165,0.131,0.0,0.021,0.007,46658,28.8,male,other,emergency_shelter,[4] Sheltered
+5,39.614,6.587,0.113,0.028,0.526,0.353,1.0,0.445,0.092,0.208,0.211,0.162,0.0,0.326,0.108,32269,19.9,male,white,outdoor,[5] Unsheltered

@@ -1,0 +1,137 @@
+======================================================================
+SYNTHETIC DATA ANALYSIS SUMMARY
+Based on SASM-generated individual-level data
+======================================================================
+
+Total synthetic individuals: 162,072
+Years covered: 2013–2026
+Number of need profiles (clusters): 6
+
+──────────────────────────────────────────────────────────────────────
+NEED PROFILES (Who is experiencing homelessness?)
+──────────────────────────────────────────────────────────────────────
+
+[0] Indigenous / Sheltered  (11.4% of population)
+  Average age:          34.4 years
+  Avg years homeless:   2.3
+  Dominant gender:      male
+  Dominant race:        indigenous
+  Mental health:        36%
+  Substance use:        18%
+  Outdoor/unsheltered:  5%
+  Chronic homeless:     17%
+  Indigenous:           100%
+  Youth (under 25):     28%
+  System-involved:      foster=16%  incarceration=13%
+
+[1] Sheltered / Mental Health / Chronic  (5.7% of population)
+  Average age:          39.5 years
+  Avg years homeless:   8.5
+  Dominant gender:      male
+  Dominant race:        white
+  Mental health:        59%
+  Substance use:        43%
+  Outdoor/unsheltered:  35%
+  Chronic homeless:     57%
+  Indigenous:           9%
+  Youth (under 25):     16%
+  System-involved:      foster=36%  incarceration=30%
+
+[2] Youth / Sheltered  (14.6% of population)
+  Average age:          18.6 years
+  Avg years homeless:   1.8
+  Dominant gender:      male
+  Dominant race:        other
+  Mental health:        44%
+  Substance use:        28%
+  Outdoor/unsheltered:  15%
+  Chronic homeless:     15%
+  Indigenous:           0%
+  Youth (under 25):     100%
+  System-involved:      foster=16%  incarceration=12%
+
+[3] Sheltered / Dual-Diagnosis / Chronic  (19.6% of population)
+  Average age:          41.7 years
+  Avg years homeless:   10.5
+  Dominant gender:      male
+  Dominant race:        white
+  Mental health:        60%
+  Substance use:        46%
+  Outdoor/unsheltered:  0%
+  Chronic homeless:     72%
+  Indigenous:           3%
+  Youth (under 25):     8%
+  System-involved:      foster=26%  incarceration=20%
+
+[4] Sheltered  (28.8% of population)
+  Average age:          40.4 years
+  Avg years homeless:   1.5
+  Dominant gender:      male
+  Dominant race:        other
+  Mental health:        48%
+  Substance use:        29%
+  Outdoor/unsheltered:  0%
+  Chronic homeless:     20%
+  Indigenous:           0%
+  Youth (under 25):     0%
+  System-involved:      foster=16%  incarceration=13%
+
+[5] Unsheltered  (19.9% of population)
+  Average age:          39.6 years
+  Avg years homeless:   6.6
+  Dominant gender:      male
+  Dominant race:        white
+  Mental health:        53%
+  Substance use:        35%
+  Outdoor/unsheltered:  100%
+  Chronic homeless:     44%
+  Indigenous:           3%
+  Youth (under 25):     11%
+  System-involved:      foster=21%  incarceration=16%
+
+──────────────────────────────────────────────────────────────────────
+FORECAST SUMMARY (2024–2026)
+──────────────────────────────────────────────────────────────────────
+
+  2024:
+    [3] Sheltered / Dual-Diagnosis / Chronic: 42.4% of population
+    [5] Unsheltered: 30.5% of population
+    [1] Sheltered / Mental Health / Chronic: 11.7% of population
+    [4] Sheltered: 6.3% of population
+    [2] Youth / Sheltered: 5.9% of population
+    [0] Indigenous / Sheltered: 3.2% of population
+
+  2025:
+    [3] Sheltered / Dual-Diagnosis / Chronic: 43.2% of population
+    [5] Unsheltered: 30.0% of population
+    [1] Sheltered / Mental Health / Chronic: 12.8% of population
+    [4] Sheltered: 5.4% of population
+    [2] Youth / Sheltered: 4.9% of population
+    [0] Indigenous / Sheltered: 3.6% of population
+
+  2026:
+    [3] Sheltered / Dual-Diagnosis / Chronic: 42.6% of population
+    [5] Unsheltered: 29.6% of population
+    [1] Sheltered / Mental Health / Chronic: 14.2% of population
+    [4] Sheltered: 5.2% of population
+    [0] Indigenous / Sheltered: 4.5% of population
+    [2] Youth / Sheltered: 4.2% of population
+
+  Fastest growing profile: [3] Sheltered / Dual-Diagnosis / Chronic
+
+──────────────────────────────────────────────────────────────────────
+PROJECTED SERVICE NEEDS (2024 forecast)
+──────────────────────────────────────────────────────────────────────
+
+  Average across all clusters:
+    chronic_homeless            : 56.9%
+    mental_health               : 56.9%
+    substance_use               : 41.8%
+    housing_loss_income         : 37.5%
+    outdoor_sleeping            : 23.4%
+    foster_care_history         : 22.3%
+    incarceration_history       : 17.8%
+    no_income                   : 16.7%
+    lgbtq                       : 10.7%
+
+======================================================================
