@@ -18,7 +18,7 @@ py -m pip install -r requirements.txt
 ```bash
 .\.venv\Scripts\python.exe sna_pipeline.py --local
 ```
-python sna_pipeline_sasm.py --local --local-flow source_data/toronto-shelter-system-flow.csv --use-observed-totals && \
+python sna_pipeline_sasm.py --local --local-flow source_data/toronto-shelter-system-flow.csv && \
 python compare_pipelines.py
 
 Outputs:

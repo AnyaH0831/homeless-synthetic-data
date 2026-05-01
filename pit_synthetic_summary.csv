@@ -1,0 +1,401 @@
+period,attribute,response,observed,synthetic,abs_error
+April 2018,age_first_homeless,25 to 49 years old,597,592,5
+April 2018,age_first_homeless,13 to 17 years old,424,428,4
+April 2018,age_first_homeless,18 to 24 years old,158,155,3
+April 2018,age_first_homeless,50 to 64 years old,144,147,3
+April 2018,age_first_homeless,Under 12 years old,61,61,0
+April 2018,age_first_homeless,Over 65 years old,16,17,1
+April 2018,age_group,25 to 49 years old,838,829,9
+April 2018,age_group,50 to 64 years old,329,342,13
+April 2018,age_group,18 to 24 years old,125,122,3
+April 2018,age_group,13 to 17 years old,65,56,9
+April 2018,age_group,Over 65 years old,43,51,8
+April 2018,cause_housing_loss,Substance use,226,225,1
+April 2018,cause_housing_loss,Other,212,219,7
+April 2018,cause_housing_loss,Incarceration (prison or jail),120,120,0
+April 2018,cause_housing_loss,Unsafe housing,113,116,3
+April 2018,cause_housing_loss,Unable to pay rent or mortgage,128,109,19
+April 2018,cause_housing_loss,Conflict with spouse/partner,100,108,8
+April 2018,cause_housing_loss,Health issue,104,104,0
+April 2018,cause_housing_loss,Job loss,84,83,1
+April 2018,cause_housing_loss,Left country/fleeing war,80,79,1
+April 2018,cause_housing_loss,Conflict with parent/guardian,73,70,3
+April 2018,cause_housing_loss,Experienced abuse by spouse/partner,52,48,4
+April 2018,cause_housing_loss,Hospitalization or treatment program,30,35,5
+April 2018,cause_housing_loss,Experienced abuse by parent/guardian,30,35,5
+April 2018,cause_housing_loss,Evicted,29,32,3
+April 2018,cause_housing_loss,Relocation,19,17,2
+April 2018,duration_homeless_past_year,More than 180 days,893,842,51
+April 2018,duration_homeless_past_year,Less than 180 days,507,558,51
+April 2018,episodes_homeless_past_year,Less than 3 episodes of homelessness,1152,1142,10
+April 2018,episodes_homeless_past_year,3 or more episodes of homelessness,248,258,10
+April 2018,family_members_tonight,Accompanied by family member(s) or other(s),1400,1400,0
+April 2018,foster_care,No,1017,1021,4
+April 2018,foster_care,Yes,383,379,4
+April 2018,foster_care_how_long_ago,5 or more years,1067,1067,0
+April 2018,foster_care_how_long_ago,2 to 5 years,201,207,6
+April 2018,foster_care_how_long_ago,1 year or less,132,126,6
+April 2018,gender,Men,853,869,16
+April 2018,gender,Women,516,498,18
+April 2018,gender,Non-binary and other identities,31,33,2
+April 2018,health_challenges,Addiction,447,464,17
+April 2018,health_challenges,Mental health issue,399,397,2
+April 2018,health_challenges,Medical condition,321,316,5
+April 2018,health_challenges,Physical disability,233,223,10
+April 2018,immigration_status,No,1055,1028,27
+April 2018,immigration_status,"Yes, immigrant",175,201,26
+April 2018,immigration_status,"Yes, refugee or refugee claimant",170,171,1
+April 2018,income_sources,Ontario Works,681,669,12
+April 2018,income_sources,Disability benefit,354,347,7
+April 2018,income_sources,Employment,119,125,6
+April 2018,income_sources,Other,58,65,7
+April 2018,income_sources,Seniors' benefits,53,62,9
+April 2018,income_sources,Child and family tax benefits,32,33,1
+April 2018,income_sources,Informal income (eg. bottle returns),33,28,5
+April 2018,income_sources,GST/HST refund,28,23,5
+April 2018,income_sources,Money from family/friends,17,19,2
+April 2018,income_sources,Employment insurance,17,16,1
+April 2018,income_sources,Student loans,8,13,5
+April 2018,language,English,1025,994,31
+April 2018,language,French,195,197,2
+April 2018,language,Neither English or French,102,122,20
+April 2018,language,No preference,78,87,9
+April 2018,location_tonight,Emergency shelter,824,813,11
+April 2018,location_tonight,Transitional housing,227,224,3
+April 2018,location_tonight,Motel / Hotel,109,125,16
+April 2018,location_tonight,Someone else's Place,102,104,2
+April 2018,location_tonight,Institution,66,68,2
+April 2018,location_tonight,Unsheltered,41,33,8
+April 2018,location_tonight,Unsure,13,16,3
+April 2018,location_tonight,Other,8,11,3
+April 2018,location_tonight,"Makeshift Shelter, Tent or Shack",6,4,2
+April 2018,location_tonight,Vehicle,4,2,2
+April 2018,military_service,Did not serve in Canadian military and/or RCMP,1334,1318,16
+April 2018,military_service,Served in Canadian military and/or RCMP,66,82,16
+April 2018,num_health_conditions,2 health conditions,477,473,4
+April 2018,num_health_conditions,1 health condition,446,436,10
+April 2018,num_health_conditions,3 health conditions,296,313,17
+April 2018,num_health_conditions,4 health conditions,181,178,3
+April 2018,racial_identity,Non-racialized,697,720,23
+April 2018,racial_identity,Racialized,703,680,23
+April 2018,sexual_orientation,Heterosexual,1270,1257,13
+April 2018,sexual_orientation,"Gay, lesbian and other",130,143,13
+April 2018,shelter_past_year,Yes,1154,1167,13
+April 2018,shelter_past_year,No,246,233,13
+April 2018,time_in_canada,Over 5 years,155,665,510
+April 2018,time_in_canada,Under 1 year,132,568,436
+April 2018,time_in_canada,1 to 5 years,47,167,120
+April 2018,time_in_ottawa,Under 1 year,466,460,6
+April 2018,time_in_ottawa,Over 5 years,407,415,8
+April 2018,time_in_ottawa,Always been in Ottawa,292,279,13
+April 2018,time_in_ottawa,1 to 5 years,235,246,11
+October 2021,acquired_brain_injury,No,1009,1003,6
+October 2021,acquired_brain_injury,Yes,331,337,6
+October 2021,age_first_homeless,25 to 49 years old,579,598,19
+October 2021,age_first_homeless,13 to 17 years old,322,327,5
+October 2021,age_first_homeless,18 to 24 years old,265,256,9
+October 2021,age_first_homeless,50 to 64 years old,119,101,18
+October 2021,age_first_homeless,Under 12 years old,37,37,0
+October 2021,age_first_homeless,Over 65 years old,18,21,3
+October 2021,age_group,25 to 49 years old,809,799,10
+October 2021,age_group,50 to 64 years old,308,313,5
+October 2021,age_group,18 to 24 years old,134,134,0
+October 2021,age_group,Over 65 years old,55,58,3
+October 2021,age_group,13 to 17 years old,34,36,2
+October 2021,cause_housing_loss,Not enough income for housing,237,250,13
+October 2021,cause_housing_loss,Substance use issue,142,139,3
+October 2021,cause_housing_loss,Conflict with spouse/partner,111,119,8
+October 2021,cause_housing_loss,Landlord/tenant conflict,119,117,2
+October 2021,cause_housing_loss,Unfit/unsafe housing conditions,94,82,12
+October 2021,cause_housing_loss,Incarceration (prison or jail),79,80,1
+October 2021,cause_housing_loss,Conflict with parent/guardian,71,73,2
+October 2021,cause_housing_loss,Mental health issue,69,73,4
+October 2021,cause_housing_loss,Experienced abuse by spouse/partner,66,71,5
+October 2021,cause_housing_loss,Relocation,67,63,4
+October 2021,cause_housing_loss,Conflict with roomate,31,36,5
+October 2021,cause_housing_loss,"Complaint (eg. pets, noise, damage)",27,34,7
+October 2021,cause_housing_loss,Hospitalization or treatment program,35,32,3
+October 2021,cause_housing_loss,Physical health issue,33,28,5
+October 2021,cause_housing_loss,Departure of family member,21,25,4
+October 2021,cause_housing_loss,Building sold/renovated,20,25,5
+October 2021,cause_housing_loss,Experienced abuse by parent/guardian,24,18,6
+October 2021,cause_housing_loss,Experienced abuse by other (unspecified),20,18,2
+October 2021,cause_housing_loss,Conflict with other (unspecified),21,17,4
+October 2021,cause_housing_loss,Experienced discrimination,14,14,0
+October 2021,cause_housing_loss,Conflict with family member,14,10,4
+October 2021,cause_housing_loss,Death of family member,9,8,1
+October 2021,cause_housing_loss,Home takeover,5,3,2
+October 2021,cause_housing_loss,House fire,6,3,3
+October 2021,cause_housing_loss,Owner moved in,5,2,3
+October 2021,citizenship,Canadian citizen,1180,1175,5
+October 2021,citizenship,Permanent resident,104,118,14
+October 2021,citizenship,Refugee claimant,44,40,4
+October 2021,citizenship,Other,7,4,3
+October 2021,citizenship,Temporary foreign worker,5,3,2
+October 2021,covid_housing_loss,No,1149,1140,9
+October 2021,covid_housing_loss,Yes,191,200,9
+October 2021,dependents_tonight,Accompanied by dependent(s),1340,1340,0
+October 2021,duration_homeless_past_year,More than 180 days,823,848,25
+October 2021,duration_homeless_past_year,Less than 180 days,517,492,25
+October 2021,education,Less than high school,526,516,10
+October 2021,education,High school graduate,366,350,16
+October 2021,education,Post-secondary or higher,260,295,35
+October 2021,education,Some post-secondary,188,179,9
+October 2021,family_members_tonight,Accompanied by family member(s) or other(s),1340,1340,0
+October 2021,foster_care,No,976,995,19
+October 2021,foster_care,Yes,364,345,19
+October 2021,foster_care_to_homeless,More than 1 year,190,725,535
+October 2021,foster_care_to_homeless,1 year or less,165,615,450
+October 2021,gender,Men,846,830,16
+October 2021,gender,Women,454,467,13
+October 2021,gender,Non-binary and other identities,40,43,3
+October 2021,health_challenges,Mental health issue,360,392,32
+October 2021,health_challenges,Substance use issue,366,338,28
+October 2021,health_challenges,Medical condition,233,243,10
+October 2021,health_challenges,Learning/cognitive limitation,195,196,1
+October 2021,health_challenges,Physical limitation,186,171,15
+October 2021,housing_challenges,Rents too high,282,292,10
+October 2021,housing_challenges,Low income,284,280,4
+October 2021,housing_challenges,Addiction,108,114,6
+October 2021,housing_challenges,No income assistance,82,102,20
+October 2021,housing_challenges,Mental health,100,91,9
+October 2021,housing_challenges,Discrimination,91,88,3
+October 2021,housing_challenges,Poor housing conditions,93,86,7
+October 2021,housing_challenges,Criminal history,67,61,6
+October 2021,housing_challenges,Health/disability,51,61,10
+October 2021,housing_challenges,Family conflict,52,41,11
+October 2021,housing_challenges,Domestic violence,34,35,1
+October 2021,housing_challenges,Lack of support,23,23,0
+October 2021,housing_challenges,Pets,18,19,1
+October 2021,housing_challenges,Children,17,17,0
+October 2021,housing_challenges,Credit checks,14,10,4
+October 2021,housing_challenges,Don't want housing,4,8,4
+October 2021,housing_challenges,Wait list for subsidized housing,11,7,4
+October 2021,housing_challenges,Lack of housing stock,9,5,4
+October 2021,housing_loss_how_long_ago,More than 180 days ago,841,849,8
+October 2021,housing_loss_how_long_ago,Less than 180 days ago,499,491,8
+October 2021,immigration_status,No,1063,1046,17
+October 2021,immigration_status,"Yes, immigrant",160,172,12
+October 2021,immigration_status,"Yes, refugee or refugee claimant",117,122,5
+October 2021,income_sources,Ontario Works,454,456,2
+October 2021,income_sources,Disability benefit,373,377,4
+October 2021,income_sources,No income,67,67,0
+October 2021,income_sources,GST/HST refund,49,60,11
+October 2021,income_sources,Child and family tax benefits,57,56,1
+October 2021,income_sources,Seniors' benefits,59,49,10
+October 2021,income_sources,Informal income (eg. bottle returns),55,48,7
+October 2021,income_sources,Employment insurance,45,47,2
+October 2021,income_sources,Part-time employment,48,42,6
+October 2021,income_sources,Full-time employment,42,41,1
+October 2021,income_sources,Other,37,39,2
+October 2021,income_sources,Money from family/friends,28,29,1
+October 2021,income_sources,Casual employment,26,29,3
+October 2021,location_tonight,Emergency shelter,740,742,2
+October 2021,location_tonight,Transitional housing,178,168,10
+October 2021,location_tonight,Someone else's place,149,145,4
+October 2021,location_tonight,Unsheltered,116,126,10
+October 2021,location_tonight,Institution,74,71,3
+October 2021,location_tonight,Unsure,39,48,9
+October 2021,location_tonight,Encampment,28,24,4
+October 2021,location_tonight,Motel/hotel (self-funded),9,13,4
+October 2021,location_tonight,Vehicle,7,3,4
+October 2021,military_service,Did not serve in Canadian military and/or RCMP,1280,1278,2
+October 2021,military_service,Served in Canadian military and/or RCMP,60,62,2
+October 2021,num_health_conditions,1 health condition,293,301,8
+October 2021,num_health_conditions,2 health conditions,274,278,4
+October 2021,num_health_conditions,0 health conditions,223,224,1
+October 2021,num_health_conditions,3 health conditions,246,219,27
+October 2021,num_health_conditions,4 health conditions,174,179,5
+October 2021,num_health_conditions,5 health conditions,130,139,9
+October 2021,racial_identity,Racialized,815,821,6
+October 2021,racial_identity,Non-racialized,525,519,6
+October 2021,reason_came_to_ottawa,To access services and supports,202,282,80
+October 2021,reason_came_to_ottawa,Family moved here,194,252,58
+October 2021,reason_came_to_ottawa,Other,150,210,60
+October 2021,reason_came_to_ottawa,To visit friends/family,95,140,45
+October 2021,reason_came_to_ottawa,Fear for safety,66,89,23
+October 2021,reason_came_to_ottawa,Employment (seeking),67,89,22
+October 2021,reason_came_to_ottawa,To find housing,60,83,23
+October 2021,reason_came_to_ottawa,To attend school,58,81,23
+October 2021,reason_came_to_ottawa,To access emergency shelters,58,70,12
+October 2021,reason_came_to_ottawa,Employment (secured),27,38,11
+October 2021,reason_came_to_ottawa,Recreation/shopping,9,6,3
+October 2021,reasons_not_in_shelter,Fear for safety,120,488,368
+October 2021,reasons_not_in_shelter,Had other temporary housing,82,328,246
+October 2021,reasons_not_in_shelter,Crowded,48,164,116
+October 2021,reasons_not_in_shelter,Bed bugs & other pests,42,152,110
+October 2021,reasons_not_in_shelter,Personal choice not to stay,24,112,88
+October 2021,reasons_not_in_shelter,Turned away (shelters are full),18,55,37
+October 2021,reasons_not_in_shelter,Turned away (banned),11,41,30
+October 2021,sexual_orientation,Heterosexual,1131,1134,3
+October 2021,sexual_orientation,"Gay, lesbian and other",153,153,0
+October 2021,sexual_orientation,Don't know,56,53,3
+October 2021,shelter_past_year,Yes,992,1010,18
+October 2021,shelter_past_year,No,348,330,18
+October 2021,support_needs,Mental health,355,331,24
+October 2021,support_needs,None of the above,309,323,14
+October 2021,support_needs,Addiction or substance use,270,239,31
+October 2021,support_needs,Medical condition,165,183,18
+October 2021,support_needs,Physical disability,84,97,13
+October 2021,support_needs,Learning disability,77,76,1
+October 2021,support_needs,Brain injury,52,57,5
+October 2021,support_needs,Pregnancy,28,34,6
+October 2021,time_in_canada,Over 5 years,169,839,670
+October 2021,time_in_canada,1 to 5 years,75,379,304
+October 2021,time_in_canada,Under 1 year,21,122,101
+October 2021,time_in_ottawa,Over 5 years,464,448,16
+October 2021,time_in_ottawa,Under 1 year,343,325,18
+October 2021,time_in_ottawa,Always been in Ottawa,325,312,13
+October 2021,time_in_ottawa,1 to 5 years,208,255,47
+October 2021,want_permanent_housing,Yes,1292,1291,1
+October 2021,want_permanent_housing,No,48,49,1
+October 2024,acquired_brain_injury,No,2212,2235,23
+October 2024,acquired_brain_injury,Yes,383,360,23
+October 2024,age_first_homeless,25 to 49 years old,1242,1270,28
+October 2024,age_first_homeless,18 to 24 years old,519,502,17
+October 2024,age_first_homeless,13 to 17 years old,389,364,25
+October 2024,age_first_homeless,50 to 64 years old,303,326,23
+October 2024,age_first_homeless,Under 12 years old,82,69,13
+October 2024,age_first_homeless,Over 65 years old,60,64,4
+October 2024,age_group,25 to 49 years old,1593,1584,9
+October 2024,age_group,50 to 64 years old,533,521,12
+October 2024,age_group,18 to 24 years old,333,327,6
+October 2024,age_group,Over 65 years old,110,130,20
+October 2024,age_group,13 to 17 years old,26,33,7
+October 2024,cause_housing_loss,Not enough income for housing,448,449,1
+October 2024,cause_housing_loss,Experienced discrimination,238,225,13
+October 2024,cause_housing_loss,Relocation,227,223,4
+October 2024,cause_housing_loss,Mental health issue,167,196,29
+October 2024,cause_housing_loss,Unfit/unsafe housing conditions,184,195,11
+October 2024,cause_housing_loss,Substance use issue,182,184,2
+October 2024,cause_housing_loss,Conflict with spouse/partner,170,136,34
+October 2024,cause_housing_loss,Conflict with other (unspecified),139,134,5
+October 2024,cause_housing_loss,Experienced abuse by spouse/partner,115,112,3
+October 2024,cause_housing_loss,Incarceration (prison or jail),81,101,20
+October 2024,cause_housing_loss,Landlord/tenant conflict,115,101,14
+October 2024,cause_housing_loss,Physical health issue,86,95,9
+October 2024,cause_housing_loss,Conflict with parent/guardian,85,80,5
+October 2024,cause_housing_loss,Experienced abuse by parent/guardian,61,67,6
+October 2024,cause_housing_loss,Experienced abuse by other (unspecified),61,60,1
+October 2024,cause_housing_loss,Departure of family member,56,54,2
+October 2024,cause_housing_loss,Death of family member,56,54,2
+October 2024,cause_housing_loss,"Complaint (eg. pets, noise, damage)",49,48,1
+October 2024,cause_housing_loss,Hospitalization or treatment program,38,40,2
+October 2024,cause_housing_loss,Building sold/renovated,24,29,5
+October 2024,cause_housing_loss,Owner moved in,13,12,1
+October 2024,citizenship,Canadian citizen,1303,1306,3
+October 2024,citizenship,Other,692,709,17
+October 2024,citizenship,Refugee claimant,415,389,26
+October 2024,citizenship,Permanent resident,181,184,3
+October 2024,citizenship,Temporary foreign worker,4,7,3
+October 2024,dependents_tonight,Accompanied by dependent(s),2595,2595,0
+October 2024,duration_homeless_past_year,More than 180 days,1563,1573,10
+October 2024,duration_homeless_past_year,Less than 180 days,1032,1022,10
+October 2024,education,High school graduate,825,868,43
+October 2024,education,Less than high school,773,772,1
+October 2024,education,Post-secondary or higher,731,677,54
+October 2024,education,Some post-secondary,266,278,12
+October 2024,family_members_tonight,Accompanied by family member(s) or other(s),2595,2595,0
+October 2024,foster_care,No,2060,2061,1
+October 2024,foster_care,Yes,535,534,1
+October 2024,foster_care_to_homeless,More than 1 year,279,1480,1201
+October 2024,foster_care_to_homeless,1 year or less,210,1115,905
+October 2024,gender,Men,1548,1520,28
+October 2024,gender,Women,988,1024,36
+October 2024,gender,Non-binary and other identities,59,51,8
+October 2024,health_challenges,Mental health issue,733,728,5
+October 2024,health_challenges,Substance use issue,646,682,36
+October 2024,health_challenges,Medical condition,455,458,3
+October 2024,health_challenges,Physical limitation,415,410,5
+October 2024,health_challenges,Learning/cognitive limitation,346,317,29
+October 2024,housing_challenges,Low income,584,594,10
+October 2024,housing_challenges,Rents too high,563,563,0
+October 2024,housing_challenges,No income assistance,245,237,8
+October 2024,housing_challenges,Lack of support,195,192,3
+October 2024,housing_challenges,Addiction,175,170,5
+October 2024,housing_challenges,Poor housing conditions,166,169,3
+October 2024,housing_challenges,Mental health,157,161,4
+October 2024,housing_challenges,Family conflict,102,114,12
+October 2024,housing_challenges,Health/disability,89,93,4
+October 2024,housing_challenges,Criminal history,86,85,1
+October 2024,housing_challenges,Discrimination,104,84,20
+October 2024,housing_challenges,Domestic violence,59,60,1
+October 2024,housing_challenges,Children,27,34,7
+October 2024,housing_challenges,Pets,25,22,3
+October 2024,housing_challenges,Don't want housing,18,17,1
+October 2024,housing_loss_how_long_ago,More than 180 days ago,1762,1760,2
+October 2024,housing_loss_how_long_ago,Less than 180 days ago,833,835,2
+October 2024,immigration_status,No,1456,1462,6
+October 2024,immigration_status,"Yes, refugee or refugee claimant",928,922,6
+October 2024,immigration_status,"Yes, immigrant",211,211,0
+October 2024,income_sources,Ontario Works,937,932,5
+October 2024,income_sources,Disability benefit,412,416,4
+October 2024,income_sources,No income,299,274,25
+October 2024,income_sources,Informal income (eg. bottle returns),194,201,7
+October 2024,income_sources,Part-time employment,128,120,8
+October 2024,income_sources,Full-time employment,109,103,6
+October 2024,income_sources,Child and family tax benefits,86,102,16
+October 2024,income_sources,Other,97,96,1
+October 2024,income_sources,Seniors' benefits,73,85,12
+October 2024,income_sources,Casual employment,77,78,1
+October 2024,income_sources,GST/HST refund,67,73,6
+October 2024,income_sources,Money from family/friends,68,68,0
+October 2024,income_sources,Employment insurance,48,47,1
+October 2024,language,English,1876,1878,2
+October 2024,language,French,431,452,21
+October 2024,language,Neither English or French,223,207,16
+October 2024,language,No preference,65,58,7
+October 2024,location_tonight,Emergency shelter,1171,1187,16
+October 2024,location_tonight,Transitional housing,652,662,10
+October 2024,location_tonight,Unsheltered,352,336,16
+October 2024,location_tonight,Someone else's place,185,156,29
+October 2024,location_tonight,Unsure,80,77,3
+October 2024,location_tonight,Encampment,63,67,4
+October 2024,location_tonight,Motel/hotel (self-funded),44,54,10
+October 2024,location_tonight,Institution,37,38,1
+October 2024,location_tonight,Vehicle,11,18,7
+October 2024,military_service,Did not serve in Canadian military and/or RCMP,2497,2491,6
+October 2024,military_service,Served in Canadian military and/or RCMP,98,104,6
+October 2024,num_health_conditions,0 health conditions,912,906,6
+October 2024,num_health_conditions,1 health condition,506,515,9
+October 2024,num_health_conditions,2 health conditions,373,364,9
+October 2024,num_health_conditions,3 health conditions,336,361,25
+October 2024,num_health_conditions,4 health conditions,274,268,6
+October 2024,num_health_conditions,5 health conditions,194,181,13
+October 2024,racial_identity,Racialized,1702,1723,21
+October 2024,racial_identity,Non-racialized,893,872,21
+October 2024,reason_came_to_ottawa,Other,346,541,195
+October 2024,reason_came_to_ottawa,Fear for safety,278,430,152
+October 2024,reason_came_to_ottawa,Family moved here,189,327,138
+October 2024,reason_came_to_ottawa,To access services and supports,201,307,106
+October 2024,reason_came_to_ottawa,To access emergency shelters,169,274,105
+October 2024,reason_came_to_ottawa,Employment (seeking),161,241,80
+October 2024,reason_came_to_ottawa,To visit friends/family,117,174,57
+October 2024,reason_came_to_ottawa,To find housing,104,146,42
+October 2024,reason_came_to_ottawa,To attend school,56,90,34
+October 2024,reason_came_to_ottawa,Employment (secured),32,57,25
+October 2024,reason_came_to_ottawa,Recreation/shopping,4,8,4
+October 2024,sexual_orientation,Heterosexual,2244,2227,17
+October 2024,sexual_orientation,"Gay, lesbian and other",325,329,4
+October 2024,sexual_orientation,Don't know,26,39,13
+October 2024,shelter_past_year,Yes,1578,1604,26
+October 2024,shelter_past_year,No,1017,991,26
+October 2024,support_needs,Financial Supports,398,386,12
+October 2024,support_needs,Supportive Housing,382,382,0
+October 2024,support_needs,Food Security,355,369,14
+October 2024,support_needs,Access to Facilities,228,241,13
+October 2024,support_needs,Mental health,258,232,26
+October 2024,support_needs,Family Supports,206,199,7
+October 2024,support_needs,Cultural Supports,162,186,24
+October 2024,support_needs,Legal Aid,197,184,13
+October 2024,support_needs,Disability Support,158,178,20
+October 2024,support_needs,Addiction or substance use,194,173,21
+October 2024,support_needs,Newcomer/Refugee Supports,38,40,2
+October 2024,support_needs,None of the above,19,25,6
+October 2024,time_in_canada,Under 1 year,613,1458,845
+October 2024,time_in_canada,1 to 5 years,270,648,378
+October 2024,time_in_canada,Over 5 years,218,489,271
+October 2024,time_in_ottawa,Under 1 year,975,952,23
+October 2024,time_in_ottawa,Always been in Ottawa,824,800,24
+October 2024,time_in_ottawa,1 to 5 years,511,567,56
+October 2024,time_in_ottawa,Over 5 years,285,276,9

@@ -1,0 +1,155 @@
+﻿Date,Count_,TotalLengthOfStay,Category,ObjectId
+2014,6744,536480,All Clients,1
+2014,4562,302103,All Singles,2
+2014,2551,250735,Family Household Members,3
+2014,1028,250735,Family Households,4
+2014,2249,234774,Family Member,5
+2014,707,234774,Family Units,6
+2014,2912,178740,Mens Shelter,7
+2014,979,33953,Mixed-Gender,8
+2014,327,16358,Offsite/Overflow Singles,9
+2014,996,62839,Single Adult Females,10
+2014,3170,214957,Single Adult Males,11
+2014,382,23533,Single Youth 18 Under,12
+2014,814,48570,Womens Shelter,13
+2014,377,24482,Youth Shelter,14
+2015,7041,529092,All Clients,15
+2015,4478,286430,All Singles,16
+2015,2865,255087,Family Household Members,17
+2015,1033,255087,Family Households,18
+2015,2618,243057,Family Member,19
+2015,785,243057,Family Units,20
+2015,2826,173189,Mens Shelter,21
+2015,987,30778,Mixed-Gender,22
+2015,253,12425,Offsite/Overflow Singles,23
+2015,1029,63206,Single Adult Females,24
+2015,3097,205754,Single Adult Males,25
+2015,331,16515,Single Youth 18 Under,26
+2015,832,46934,Womens Shelter,27
+2015,405,23104,Youth Shelter,28
+2016,7504,555657,All Clients,29
+2016,4675,286713,All Singles,30
+2016,3211,285288,Family Household Members,31
+2016,1238,285288,Family Households,32
+2016,2876,269007,Family Member,33
+2016,901,269007,Family Units,34
+2016,2961,167909,Mens Shelter,35
+2016,1232,33417,Mixed-Gender,36
+2016,339,16344,Offsite/Overflow Singles,37
+2016,1068,64147,Single Adult Females,38
+2016,3286,203668,Single Adult Males,39
+2016,302,17866,Single Youth 18 Under,40
+2016,839,44972,Womens Shelter,41
+2016,299,24071,Youth Shelter,42
+2017,7877,689066,All Clients,43
+2017,4704,287607,All Singles,44
+2017,3423,409616,Family Household Members,45
+2017,1169,409616,Family Households,46
+2017,3244,401459,Family Member,47
+2017,987,401459,Family Units,48
+2017,3090,168789,Mens Shelter,49
+2017,1404,38065,Mixed-Gender,50
+2017,182,8157,Offsite/Overflow Singles,51
+2017,1080,66516,Single Adult Females,52
+2017,3343,201588,Single Adult Males,53
+2017,265,18485,Single Youth 18 Under,54
+2017,810,48294,Womens Shelter,55
+2017,281,24302,Youth Shelter,56
+2018,8441,753793,All Clients,57
+2018,4814,299977,All Singles,58
+2018,3805,460843,Family Household Members,59
+2018,1212,460843,Family Households,60
+2018,3683,453946,Family Member,61
+2018,1087,453946,Family Units,62
+2018,3113,179063,Mens Shelter,63
+2018,1613,38754,Mixed-Gender,64
+2018,127,7027,Offsite/Overflow Singles,65
+2018,1129,69245,Single Adult Females,66
+2018,3402,207777,Single Adult Males,67
+2018,258,20670,Single Youth 18 Under,68
+2018,842,51206,Womens Shelter,69
+2018,252,23927,Youth Shelter,70
+2019,8704,855207,All Clients,71
+2019,4796,310147,All Singles,72
+2019,4112,552646,Family Household Members,73
+2019,1300,552646,Family Households,74
+2019,3978,545065,Family Member,75
+2019,1166,545065,Family Units,76
+2019,3059,188520,Mens Shelter,77
+2019,1737,38164,Mixed-Gender,78
+2019,135,7586,Offsite/Overflow Singles,79
+2019,1127,72366,Single Adult Females,80
+2019,3409,219023,Single Adult Males,81
+2019,223,16285,Single Youth 18 Under,82
+2019,780,53229,Womens Shelter,83
+2019,241,22648,Youth Shelter,84
+2020,7176,867145,All Clients,85
+2020,4054,288498,All Singles,86
+2020,3327,591003,Family Household Members,87
+2020,1122,591003,Family Households,88
+2020,3165,578656,Family Member,89
+2020,958,578656,Family Units,90
+2020,2522,171054,Mens Shelter,91
+2020,1808,39171,Mixed-Gender,92
+2020,165,12356,Offsite/Overflow Singles,93
+2020,912,65277,Single Adult Females,94
+2020,2933,204847,Single Adult Males,95
+2020,165,16283,Single Youth 18 Under,96
+2020,520,43412,Womens Shelter,97
+2020,197,22505,Youth Shelter,98
+2021,6966,703229,All Clients,99
+2021,4031,282362,All Singles,100
+2021,3206,434454,Family Household Members,101
+2021,1117,434454,Family Households,102
+2021,2984,420867,Family Member,103
+2021,884,420867,Family Units,104
+2021,2219,138553,Mens Shelter,105
+2021,1658,55490,Mixed-Gender,106
+2021,233,13587,Offsite/Overflow Singles,107
+2021,1105,69952,Single Adult Females,108
+2021,2688,193595,Single Adult Males,109
+2021,197,15862,Single Youth 18 Under,110
+2021,920,53469,Womens Shelter,111
+2021,214,21263,Youth Shelter,112
+2022,7584,750921,All Clients,113
+2022,4443,320730,All Singles,114
+2022,3420,447101,Family Household Members,115
+2022,1206,447101,Family Households,116
+2022,3263,428891,Family Member,117
+2022,984,428891,Family Units,118
+2022,2494,159097,Mens Shelter,119
+2022,2052,81655,Mixed-Gender,120
+2022,223,18340,Offsite/Overflow Singles,121
+2022,1200,75676,Single Adult Females,122
+2022,3044,226837,Single Adult Males,123
+2022,204,18217,Single Youth 18 Under,124
+2022,805,41449,Womens Shelter,125
+2022,176,20167,Youth Shelter,126
+2023,8570,825109,All Clients,127
+2023,5199,338609,All Singles,128
+2023,3600,501516,Family Household Members,129
+2023,1189,501516,Family Households,130
+2023,3446,485994,Family Member,131
+2023,1006,485994,Family Units,132
+2023,2870,178856,Mens Shelter,133
+2023,2389,50024,Mixed-Gender,134
+2023,184,15524,Offsite/Overflow Singles,135
+2023,1465,87616,Single Adult Females,136
+2023,3579,233894,Single Adult Males,137
+2023,159,17099,Single Youth 18 Under,138
+2023,1171,53905,Womens Shelter,139
+2023,178,20988,Youth Shelter,140
+2024,9390,1023776,All Clients,141
+2024,5444,453009,All Singles,142
+2024,4190,591024,Family Household Members,143
+2024,1412,591024,Family Households,144
+2024,3966,567563,Family Member,145
+2024,1160,567563,Family Units,146
+2024,2282,179596,Mens Shelter,147
+2024,2021,42035,Mixed-Gender,148
+2024,252,23461,Offsite/Overflow Singles,149
+2024,1608,134688,Single Adult Females,150
+2024,3646,299931,Single Adult Males,151
+2024,196,18390,Single Youth 18 Under,152
+2024,1716,146667,Womens Shelter,153
+2024,149,21184,Youth Shelter,154

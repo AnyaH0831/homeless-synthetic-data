@@ -1,0 +1,317 @@
+year,attribute,response,expected_prop,actual_prop,error
+2018,gender,Men,0.6007,0.6158,0.0151
+2018,gender,Non-binary and other identities,0.0221,0.0213,0.0008
+2018,gender,Women,0.3636,0.3629,0.0007
+2018,age_group,13 to 17 years old,0.0457,0.0448,0.0009
+2018,age_group,18 to 24 years old,0.0879,0.0886,0.0008
+2018,age_group,25 to 49 years old,0.5871,0.6024,0.0153
+2018,age_group,50 to 64 years old,0.2307,0.2347,0.004
+2018,age_group,Over 65 years old,0.03,0.0295,0.0005
+2018,racial_identity,Non-racialized,0.4764,0.4927,0.0163
+2018,racial_identity,Racialized,0.4807,0.5073,0.0266
+2018,sexual_orientation,"Gay, lesbian and other",0.0886,0.0903,0.0017
+2018,sexual_orientation,Heterosexual,0.8686,0.9097,0.0412
+2018,language,English,4.7324,0.7285,4.0039
+2018,language,French,0.892,0.141,0.751
+2018,language,Neither English or French,0.4554,0.075,0.3804
+2018,language,No preference,0.3568,0.0556,0.3012
+2018,income_sources,Child and family tax benefits,0.0236,0.0219,0.0017
+2018,income_sources,Disability benefit,0.26,0.2566,0.0034
+2018,income_sources,Employment,0.0879,0.0846,0.0033
+2018,income_sources,Employment insurance,0.0121,0.0107,0.0015
+2018,income_sources,GST/HST refund,0.0207,0.0207,0.0
+2018,income_sources,Informal income (eg. bottle returns),0.0243,0.0286,0.0043
+2018,income_sources,Money from family/friends,0.0121,0.0117,0.0004
+2018,income_sources,Ontario Works,0.4986,0.4811,0.0175
+2018,income_sources,Other,0.0421,0.0418,0.0003
+2018,income_sources,Seniors' benefits,0.0386,0.0373,0.0013
+2018,income_sources,Student loans,0.0057,0.005,0.0007
+2018,health_challenges,Addiction,0.4971,0.3192,0.178
+2018,health_challenges,Medical condition,0.3571,0.2308,0.1264
+2018,health_challenges,Mental health issue,0.4436,0.2842,0.1594
+2018,health_challenges,Physical disability,0.2586,0.1659,0.0927
+2018,immigration_status,No,0.7293,0.7478,0.0185
+2018,immigration_status,"Yes, immigrant",0.1207,0.1263,0.0056
+2018,immigration_status,"Yes, refugee or refugee claimant",0.1179,0.1259,0.0081
+2018,location_tonight,Emergency shelter,0.585,0.5886,0.0036
+2018,location_tonight,Institution,0.0471,0.0506,0.0034
+2018,location_tonight,"Makeshift Shelter, Tent or Shack",0.0043,0.0049,0.0006
+2018,location_tonight,Motel / Hotel,0.0764,0.0804,0.004
+2018,location_tonight,Other,0.0057,0.0053,0.0004
+2018,location_tonight,Someone else's Place,0.0721,0.0718,0.0004
+2018,location_tonight,Transitional housing,0.1614,0.1573,0.0041
+2018,location_tonight,Unsheltered,0.0293,0.0299,0.0006
+2018,location_tonight,Unsure,0.0093,0.0078,0.0015
+2018,location_tonight,Vehicle,0.0029,0.0034,0.0006
+2018,shelter_past_year,No,0.1736,0.166,0.0076
+2018,shelter_past_year,Yes,0.8157,0.834,0.0183
+2019,gender,Men,0.6163,0.6171,0.0007
+2019,gender,Non-binary and other identities,0.0248,0.0277,0.0029
+2019,gender,Women,0.3589,0.3552,0.0036
+2019,racial_identity,Racialized,0.536,0.5268,0.0092
+2019,racial_identity,Non-racialized,0.464,0.4732,0.0092
+2019,shelter_past_year,Yes,0.7964,0.796,0.0004
+2019,shelter_past_year,No,0.2036,0.204,0.0004
+2019,education,High school graduate,0.2734,0.2745,0.0011
+2019,education,Post-secondary or higher,0.1937,0.1934,0.0004
+2019,education,Less than high school,0.3928,0.3929,0.0001
+2019,education,Some post-secondary,0.1401,0.1392,0.0009
+2019,sexual_orientation,Don't know,0.0143,0.0131,0.0012
+2019,sexual_orientation,"Gay, lesbian and other",0.1,0.1006,0.0007
+2019,sexual_orientation,Heterosexual,0.8857,0.8863,0.0006
+2019,health_challenges,Mental health issue,0.2782,0.2848,0.0066
+2019,health_challenges,Addiction,0.1889,0.1897,0.0008
+2019,health_challenges,Substance use issue,0.1116,0.1131,0.0015
+2019,health_challenges,Physical limitation,0.0566,0.0581,0.0016
+2019,health_challenges,Physical disability,0.0983,0.0935,0.0047
+2019,health_challenges,Learning/cognitive limitation,0.0597,0.057,0.0027
+2019,health_challenges,Medical condition,0.2068,0.2038,0.0029
+2019,acquired_brain_injury,Yes,0.2472,0.254,0.0068
+2019,acquired_brain_injury,No,0.7528,0.746,0.0068
+2019,language,No preference,0.0554,0.0537,0.0018
+2019,language,Neither English or French,0.0708,0.0719,0.0012
+2019,language,English,0.7352,0.7347,0.0005
+2019,language,French,0.1386,0.1397,0.0011
+2019,location_tonight,Motel / Hotel,0.0512,0.0517,0.0005
+2019,location_tonight,"Makeshift Shelter, Tent or Shack",0.0029,0.0023,0.0006
+2019,location_tonight,Transitional housing,0.1526,0.1494,0.0032
+2019,location_tonight,Emergency shelter,0.5766,0.5739,0.0027
+2019,location_tonight,Unsheltered,0.0486,0.0484,0.0002
+2019,location_tonight,Vehicle,0.0037,0.0037,0.0
+2019,location_tonight,Someone else's Place,0.0483,0.0515,0.0032
+2019,location_tonight,Motel/hotel (self-funded),0.0022,0.0018,0.0004
+2019,location_tonight,Encampment,0.007,0.007,0.0
+2019,location_tonight,Other,0.0038,0.004,0.0002
+2019,location_tonight,Someone else's place,0.0372,0.0364,0.0008
+2019,location_tonight,Unsure,0.016,0.0171,0.0012
+2019,location_tonight,Institution,0.0501,0.0528,0.0028
+2019,income_sources,Child and family tax benefits,0.023,0.0222,0.0008
+2019,income_sources,GST/HST refund,0.0202,0.023,0.0028
+2019,income_sources,Informal income (eg. bottle returns),0.0237,0.0242,0.0006
+2019,income_sources,Employment,0.0857,0.087,0.0013
+2019,income_sources,Ontario Works,0.4861,0.4815,0.0046
+2019,income_sources,Disability benefit,0.2535,0.2476,0.0059
+2019,income_sources,Seniors' benefits,0.0376,0.0411,0.0035
+2019,income_sources,Employment insurance,0.0118,0.0116,0.0002
+2019,income_sources,Other,0.0411,0.0423,0.0012
+2019,income_sources,Money from family/friends,0.0118,0.0136,0.0017
+2019,income_sources,Student loans,0.0056,0.006,0.0004
+2019,immigration_status,"Yes, refugee or refugee claimant",0.1104,0.112,0.0016
+2019,immigration_status,No,0.7667,0.7677,0.001
+2019,immigration_status,"Yes, immigrant",0.1229,0.1203,0.0027
+2019,age_group,18 to 24 years old,0.0931,0.0932,0.0001
+2019,age_group,25 to 49 years old,0.6,0.6027,0.0027
+2019,age_group,13 to 17 years old,0.0395,0.0404,0.0009
+2019,age_group,50 to 64 years old,0.2332,0.2254,0.0078
+2019,age_group,Over 65 years old,0.0342,0.0383,0.0041
+2020,gender,Men,0.6237,0.6368,0.0132
+2020,gender,Non-binary and other identities,0.0272,0.0307,0.0035
+2020,gender,Women,0.3491,0.3325,0.0166
+2020,racial_identity,Racialized,0.5712,0.5659,0.0053
+2020,racial_identity,Non-racialized,0.4288,0.4341,0.0053
+2020,shelter_past_year,Yes,0.7683,0.7669,0.0014
+2020,shelter_past_year,No,0.2317,0.2331,0.0014
+2020,education,High school graduate,0.2734,0.271,0.0023
+2020,education,Post-secondary or higher,0.1937,0.1887,0.005
+2020,education,Less than high school,0.3928,0.3992,0.0064
+2020,education,Some post-secondary,0.1401,0.141,0.0009
+2020,sexual_orientation,Don't know,0.0283,0.0265,0.0018
+2020,sexual_orientation,"Gay, lesbian and other",0.1072,0.1035,0.0036
+2020,sexual_orientation,Heterosexual,0.8646,0.87,0.0054
+2020,health_challenges,Mental health issue,0.2727,0.2783,0.0055
+2020,health_challenges,Addiction,0.0849,0.0778,0.0071
+2020,health_challenges,Substance use issue,0.2006,0.1979,0.0027
+2020,health_challenges,Physical limitation,0.1017,0.101,0.0007
+2020,health_challenges,Physical disability,0.0442,0.0492,0.005
+2020,health_challenges,Learning/cognitive limitation,0.1073,0.1074,0.0001
+2020,health_challenges,Medical condition,0.1887,0.1884,0.0003
+2020,acquired_brain_injury,Yes,0.2472,0.2478,0.0006
+2020,acquired_brain_injury,No,0.7528,0.7522,0.0006
+2020,language,No preference,0.0554,0.0535,0.0019
+2020,language,Neither English or French,0.0708,0.0726,0.0019
+2020,language,English,0.7352,0.7345,0.0007
+2020,language,French,0.1386,0.1394,0.0008
+2020,location_tonight,Motel / Hotel,0.0255,0.0233,0.0023
+2020,location_tonight,"Makeshift Shelter, Tent or Shack",0.0014,0.0008,0.0006
+2020,location_tonight,Transitional housing,0.1427,0.1473,0.0046
+2020,location_tonight,Emergency shelter,0.5644,0.5655,0.0011
+2020,location_tonight,Unsheltered,0.0676,0.0662,0.0014
+2020,location_tonight,Vehicle,0.0044,0.0052,0.0007
+2020,location_tonight,Someone else's Place,0.0241,0.0259,0.0018
+2020,location_tonight,Motel/hotel (self-funded),0.0045,0.0035,0.001
+2020,location_tonight,Encampment,0.014,0.0146,0.0007
+2020,location_tonight,Other,0.0019,0.0014,0.0005
+2020,location_tonight,Someone else's place,0.0743,0.0739,0.0004
+2020,location_tonight,Unsure,0.0225,0.0231,0.0006
+2020,location_tonight,Institution,0.0526,0.0493,0.0033
+2020,income_sources,Child and family tax benefits,0.023,0.0217,0.0012
+2020,income_sources,GST/HST refund,0.0202,0.0196,0.0005
+2020,income_sources,Informal income (eg. bottle returns),0.0237,0.0226,0.0011
+2020,income_sources,Employment,0.0857,0.0895,0.0038
+2020,income_sources,Ontario Works,0.4861,0.4907,0.0046
+2020,income_sources,Disability benefit,0.2535,0.2454,0.0081
+2020,income_sources,Seniors' benefits,0.0376,0.0347,0.0029
+2020,income_sources,Employment insurance,0.0118,0.0123,0.0004
+2020,income_sources,Other,0.0411,0.0465,0.0055
+2020,income_sources,Money from family/friends,0.0118,0.0113,0.0006
+2020,income_sources,Student loans,0.0056,0.0057,0.0001
+2020,immigration_status,"Yes, refugee or refugee claimant",0.0989,0.0995,0.0006
+2020,immigration_status,No,0.7799,0.7843,0.0044
+2020,immigration_status,"Yes, immigrant",0.1212,0.1162,0.0049
+2020,age_group,18 to 24 years old,0.0966,0.1013,0.0047
+2020,age_group,25 to 49 years old,0.6017,0.6024,0.0007
+2020,age_group,13 to 17 years old,0.0325,0.0294,0.0031
+2020,age_group,50 to 64 years old,0.2313,0.2277,0.0036
+2020,age_group,Over 65 years old,0.0378,0.0392,0.0014
+2021,gender,Men,0.6216,0.6328,0.0111
+2021,gender,Non-binary and other identities,0.0291,0.0286,0.0005
+2021,gender,Women,0.3343,0.3386,0.0043
+2021,age_group,13 to 17 years old,0.0254,0.024,0.0014
+2021,age_group,18 to 24 years old,0.0993,0.0978,0.0015
+2021,age_group,25 to 49 years old,0.5985,0.6018,0.0033
+2021,age_group,50 to 64 years old,0.2276,0.2354,0.0078
+2021,age_group,Over 65 years old,0.041,0.0411,0.0
+2021,racial_identity,Non-racialized,0.3522,0.3895,0.0372
+2021,racial_identity,Racialized,0.5463,0.6105,0.0643
+2021,sexual_orientation,Don't know,0.0418,0.0396,0.0022
+2021,sexual_orientation,"Gay, lesbian and other",0.1142,0.117,0.0028
+2021,sexual_orientation,Heterosexual,0.844,0.8434,0.0006
+2021,education,High school graduate,0.2664,0.2725,0.006
+2021,education,Less than high school,0.3828,0.3906,0.0078
+2021,education,Post-secondary or higher,0.1888,0.1958,0.007
+2021,education,Some post-secondary,0.1366,0.1411,0.0045
+2021,health_challenges,Learning/cognitive limitation,0.3142,0.1434,0.1708
+2021,health_challenges,Medical condition,0.3739,0.1738,0.2
+2021,health_challenges,Mental health issue,0.5769,0.2762,0.3007
+2021,health_challenges,Physical limitation,0.2978,0.1328,0.165
+2021,health_challenges,Substance use issue,0.5873,0.2738,0.3136
+2021,acquired_brain_injury,No,0.7022,0.7539,0.0517
+2021,acquired_brain_injury,Yes,0.2306,0.2461,0.0155
+2021,immigration_status,No,0.759,0.7962,0.0372
+2021,immigration_status,"Yes, immigrant",0.1142,0.1179,0.0037
+2021,immigration_status,"Yes, refugee or refugee claimant",0.0836,0.086,0.0024
+2021,location_tonight,Emergency shelter,0.5522,0.5551,0.0029
+2021,location_tonight,Encampment,0.0209,0.0211,0.0002
+2021,location_tonight,Institution,0.0552,0.0591,0.0039
+2021,location_tonight,Motel/hotel (self-funded),0.0067,0.006,0.0007
+2021,location_tonight,Someone else's place,0.1112,0.1104,0.0008
+2021,location_tonight,Transitional housing,0.1328,0.1298,0.0031
+2021,location_tonight,Unsheltered,0.0866,0.083,0.0036
+2021,location_tonight,Unsure,0.0291,0.0299,0.0008
+2021,location_tonight,Vehicle,0.0052,0.0056,0.0004
+2021,shelter_past_year,No,0.2575,0.2702,0.0127
+2021,shelter_past_year,Yes,0.7336,0.7298,0.0038
+2022,gender,Men,0.62,0.6238,0.0038
+2022,gender,Non-binary and other identities,0.0274,0.0282,0.0009
+2022,gender,Women,0.3526,0.348,0.0047
+2022,racial_identity,Racialized,0.6234,0.6225,0.0009
+2022,racial_identity,Non-racialized,0.3766,0.3775,0.0009
+2022,education,High school graduate,0.2874,0.2918,0.0044
+2022,education,Less than high school,0.363,0.3651,0.0021
+2022,education,Post-secondary or higher,0.2214,0.2191,0.0022
+2022,education,Some post-secondary,0.1283,0.1239,0.0043
+2022,shelter_past_year,Yes,0.6959,0.6959,0.0
+2022,shelter_past_year,No,0.3041,0.3041,0.0
+2022,sexual_orientation,Don't know,0.0321,0.0344,0.0023
+2022,sexual_orientation,"Gay, lesbian and other",0.1175,0.1116,0.0059
+2022,sexual_orientation,Heterosexual,0.8504,0.854,0.0037
+2022,health_challenges,Mental health issue,0.272,0.2737,0.0018
+2022,health_challenges,Substance use issue,0.2669,0.2645,0.0024
+2022,health_challenges,Physical limitation,0.1441,0.1491,0.0051
+2022,health_challenges,Learning/cognitive limitation,0.1428,0.1415,0.0013
+2022,health_challenges,Medical condition,0.1743,0.1711,0.0031
+2022,acquired_brain_injury,Yes,0.2151,0.2087,0.0064
+2022,acquired_brain_injury,No,0.7849,0.7913,0.0064
+2022,location_tonight,Vehicle,0.0048,0.0055,0.0007
+2022,location_tonight,Transitional housing,0.171,0.1729,0.0019
+2022,location_tonight,Motel/hotel (self-funded),0.01,0.0123,0.0022
+2022,location_tonight,Encampment,0.022,0.0194,0.0026
+2022,location_tonight,Emergency shelter,0.5197,0.5198,0.0
+2022,location_tonight,Unsheltered,0.1024,0.103,0.0006
+2022,location_tonight,Someone else's place,0.0983,0.098,0.0004
+2022,location_tonight,Unsure,0.0296,0.029,0.0006
+2022,location_tonight,Institution,0.042,0.0402,0.0018
+2022,immigration_status,"Yes, refugee or refugee claimant",0.1722,0.177,0.0047
+2022,immigration_status,No,0.7203,0.7162,0.0041
+2022,immigration_status,"Yes, immigrant",0.1074,0.1068,0.0006
+2022,age_group,18 to 24 years old,0.1091,0.1063,0.0028
+2022,age_group,25 to 49 years old,0.6067,0.6079,0.0011
+2022,age_group,13 to 17 years old,0.0207,0.0198,0.0009
+2022,age_group,50 to 64 years old,0.2218,0.222,0.0002
+2022,age_group,Over 65 years old,0.0417,0.044,0.0023
+2023,gender,Men,0.6086,0.6166,0.008
+2023,gender,Non-binary and other identities,0.0251,0.025,0.0001
+2023,gender,Women,0.3663,0.3585,0.0079
+2023,racial_identity,Racialized,0.6394,0.6425,0.0031
+2023,racial_identity,Non-racialized,0.3606,0.3575,0.0031
+2023,education,High school graduate,0.3023,0.3089,0.0066
+2023,education,Less than high school,0.3313,0.3333,0.0019
+2023,education,Post-secondary or higher,0.2507,0.2448,0.0058
+2023,education,Some post-secondary,0.1157,0.1131,0.0027
+2023,shelter_past_year,Yes,0.6519,0.6551,0.0032
+2023,shelter_past_year,No,0.3481,0.3449,0.0032
+2023,sexual_orientation,Don't know,0.0216,0.0246,0.003
+2023,sexual_orientation,"Gay, lesbian and other",0.1211,0.1268,0.0057
+2023,sexual_orientation,Heterosexual,0.8573,0.8485,0.0088
+2023,health_challenges,Mental health issue,0.2765,0.2807,0.0042
+2023,health_challenges,Substance use issue,0.259,0.2641,0.005
+2023,health_challenges,Physical limitation,0.1511,0.1525,0.0015
+2023,health_challenges,Learning/cognitive limitation,0.1386,0.1331,0.0055
+2023,health_challenges,Medical condition,0.1748,0.1695,0.0052
+2023,acquired_brain_injury,Yes,0.182,0.1845,0.0025
+2023,acquired_brain_injury,No,0.818,0.8155,0.0025
+2023,location_tonight,Vehicle,0.0045,0.0041,0.0004
+2023,location_tonight,Transitional housing,0.2104,0.2196,0.0092
+2023,location_tonight,Motel/hotel (self-funded),0.0135,0.0144,0.0009
+2023,location_tonight,Encampment,0.0231,0.021,0.0021
+2023,location_tonight,Emergency shelter,0.4861,0.4811,0.005
+2023,location_tonight,Unsheltered,0.1188,0.1146,0.0042
+2023,location_tonight,Someone else's place,0.0851,0.0854,0.0004
+2023,location_tonight,Unsure,0.0302,0.0313,0.0011
+2023,location_tonight,Institution,0.0283,0.0286,0.0003
+2023,immigration_status,"Yes, refugee or refugee claimant",0.2622,0.2608,0.0014
+2023,immigration_status,No,0.643,0.6414,0.0016
+2023,immigration_status,"Yes, immigrant",0.0948,0.0978,0.003
+2023,age_group,18 to 24 years old,0.1185,0.1201,0.0016
+2023,age_group,25 to 49 years old,0.6102,0.6096,0.0006
+2023,age_group,13 to 17 years old,0.0155,0.0156,0.0001
+2023,age_group,50 to 64 years old,0.2138,0.2125,0.0013
+2023,age_group,Over 65 years old,0.042,0.0422,0.0002
+2024,gender,Men,0.5565,0.5931,0.0366
+2024,gender,Non-binary and other identities,0.0212,0.0232,0.002
+2024,gender,Women,0.3549,0.3837,0.0288
+2024,age_group,13 to 17 years old,0.0092,0.0101,0.0009
+2024,age_group,18 to 24 years old,0.1179,0.1211,0.0032
+2024,age_group,25 to 49 years old,0.5634,0.6124,0.049
+2024,age_group,50 to 64 years old,0.1884,0.2129,0.0244
+2024,age_group,Over 65 years old,0.0389,0.0436,0.0046
+2024,racial_identity,Non-racialized,0.2948,0.3421,0.0473
+2024,racial_identity,Racialized,0.5618,0.6579,0.0961
+2024,sexual_orientation,Don't know,0.0089,0.0108,0.0019
+2024,sexual_orientation,"Gay, lesbian and other",0.1098,0.1213,0.0115
+2024,sexual_orientation,Heterosexual,0.7595,0.8679,0.1084
+2024,education,High school graduate,0.2836,0.3146,0.031
+2024,education,Less than high school,0.2655,0.3016,0.0361
+2024,education,Post-secondary or higher,0.2513,0.2826,0.0314
+2024,education,Some post-secondary,0.0913,0.1012,0.0098
+2024,health_challenges,Learning/cognitive limitation,0.1985,0.1348,0.0636
+2024,health_challenges,Medical condition,0.2613,0.1715,0.0898
+2024,health_challenges,Mental health issue,0.4208,0.2841,0.1367
+2024,health_challenges,Physical limitation,0.2385,0.1584,0.0802
+2024,health_challenges,Substance use issue,0.3707,0.2512,0.1195
+2024,acquired_brain_injury,No,0.7561,0.8525,0.0964
+2024,acquired_brain_injury,Yes,0.131,0.1475,0.0165
+2024,immigration_status,No,0.4913,0.557,0.0656
+2024,immigration_status,"Yes, immigrant",0.0713,0.083,0.0117
+2024,immigration_status,"Yes, refugee or refugee claimant",0.3133,0.3601,0.0468
+2024,location_tonight,Emergency shelter,0.4293,0.449,0.0197
+2024,location_tonight,Encampment,0.0231,0.0232,0.0001
+2024,location_tonight,Institution,0.0135,0.0155,0.0021
+2024,location_tonight,Motel/hotel (self-funded),0.0162,0.0169,0.0007
+2024,location_tonight,Someone else's place,0.0678,0.0696,0.0018
+2024,location_tonight,Transitional housing,0.2389,0.2604,0.0215
+2024,location_tonight,Unsheltered,0.1291,0.1318,0.0027
+2024,location_tonight,Unsure,0.0293,0.0301,0.0009
+2024,location_tonight,Vehicle,0.0039,0.0033,0.0006
+2024,shelter_past_year,No,0.3919,0.3888,0.0031
+2024,shelter_past_year,Yes,0.6081,0.6112,0.0031
