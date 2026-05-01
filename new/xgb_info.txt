@@ -1,0 +1,4 @@
+xgb_type_model.pkl — the trained model
+xgb_feature_importance.png/.csv — which features drive cluster membership (e.g., does outdoor_sleeping dominate for the Unsheltered cluster?)
+xgb_confusion_matrix.png — which clusters get confused with each other
+xgb_shap_by_cluster.csv / xgb_shap_summary.png — per-cluster SHAP breakdown (requires pip install shap)

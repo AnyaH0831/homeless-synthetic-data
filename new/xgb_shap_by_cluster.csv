@@ -1,0 +1,37 @@
+cluster,cluster_name,feature,mean_abs_shap
+0,Indigenous / Sheltered,age,0.50249
+0,Indigenous / Sheltered,outdoor_sleeping,0.49345
+0,Indigenous / Sheltered,years_homeless,0.48942
+0,Indigenous / Sheltered,physical_health,0.45397
+0,Indigenous / Sheltered,substance_use,0.41036
+0,Indigenous / Sheltered,mental_health,0.39571
+1,Sheltered / Mental Health / Chronic,outdoor_sleeping,0.61545
+1,Sheltered / Mental Health / Chronic,physical_health,0.56267
+1,Sheltered / Mental Health / Chronic,age,0.55011
+1,Sheltered / Mental Health / Chronic,substance_use,0.54243
+1,Sheltered / Mental Health / Chronic,years_homeless,0.48003
+1,Sheltered / Mental Health / Chronic,mental_health,0.46712
+2,Youth / Sheltered,mental_health,0.573
+2,Youth / Sheltered,age,0.5341
+2,Youth / Sheltered,outdoor_sleeping,0.52239
+2,Youth / Sheltered,years_homeless,0.49955
+2,Youth / Sheltered,substance_use,0.42662
+2,Youth / Sheltered,physical_health,0.29529
+3,Sheltered / Dual-Diagnosis / Chronic,age,0.54778
+3,Sheltered / Dual-Diagnosis / Chronic,mental_health,0.52278
+3,Sheltered / Dual-Diagnosis / Chronic,years_homeless,0.47985
+3,Sheltered / Dual-Diagnosis / Chronic,physical_health,0.42649
+3,Sheltered / Dual-Diagnosis / Chronic,outdoor_sleeping,0.42522
+3,Sheltered / Dual-Diagnosis / Chronic,substance_use,0.40545
+4,Sheltered,mental_health,0.52772
+4,Sheltered,outdoor_sleeping,0.50403
+4,Sheltered,years_homeless,0.48794
+4,Sheltered,age,0.41052
+4,Sheltered,substance_use,0.40971
+4,Sheltered,physical_health,0.31055
+5,Unsheltered,mental_health,0.60322
+5,Unsheltered,age,0.57496
+5,Unsheltered,years_homeless,0.50296
+5,Unsheltered,physical_health,0.44041
+5,Unsheltered,substance_use,0.41281
+5,Unsheltered,outdoor_sleeping,0.39869
