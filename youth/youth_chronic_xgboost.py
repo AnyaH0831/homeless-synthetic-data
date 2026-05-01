@@ -32,6 +32,7 @@ Load and predict on new data:
   probabilities = model["xgb"].predict_proba(X)[:, 1]   # P(chronic)
 """
 
+
 import argparse
 import sys
 import warnings
@@ -43,6 +44,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, roc_auc_score, confusion_matrix
 from xgboost import XGBClassifier
 
+# For plotting
+import matplotlib.pyplot as plt
+import seaborn as sns
+
 warnings.filterwarnings("ignore")
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -52,43 +57,26 @@ DEFAULT_TARGET = "chronic_homeless"
 # Numeric columns — used as-is after median imputation
 NUMERIC_COLS = [
     "year",
-    "age_first_homeless",
-    "duration_homeless_past_year",
-    "episodes_homeless_past_year",
-    "family_members_tonight",
-    "dependents_tonight",
-    "num_health_conditions",
-    "housing_loss_how_long_ago",
-    "foster_care_how_long_ago",
-    "time_in_canada",
-    "time_in_ottawa",
+    "age",
+    "years_homeless",
 ]
 
-# Categorical columns — label-encoded (each unique value → integer)
+# Binary/categorical columns — used directly (already 0/1 in this dataset)
 CATEGORICAL_COLS = [
-    "acquired_brain_injury",
-    "age_group",
-    "cause_housing_loss",
-    "citizenship",
-    "covid_housing_loss",
-    "education",
-    "foster_care",
-    "foster_care_to_homeless",
-    "gender",
-    "health_challenges",
-    "housing_challenges",
-    "immigration_status",
-    "income_sources",
-    "language",
-    "location_tonight",
-    "military_service",
-    "racial_identity",
-    "reason_came_to_ottawa",
-    "reasons_not_in_shelter",
-    "sexual_orientation",
-    "shelter_past_year",
-    "support_needs",
-    "want_permanent_housing",
+    "mental_health",
+    "substance_use",
+    "physical_health",
+    "outdoor_sleeping",
+    "lgbtq",
+    "indigenous",
+    "indigenous_flag",   # alias — only one will be present
+    "immigrant",
+    "foster_care_history",
+    "incarceration_history",
+    "no_income",
+    "housing_loss_income",
+    "housing_loss_health",
+    "youth",
 ]
 
 # ── Encoding ──────────────────────────────────────────────────────────────────
@@ -210,10 +198,56 @@ def train(path, target_col, out_model, test_size, seed):
     y_prob = xgb.predict_proba(X_test)[:, 1]
     auc = roc_auc_score(y_test, y_prob)
 
+
     print(f"\n-- Evaluation (test set {test_size:.0%} holdout) --")
     print(f"  ROC-AUC: {auc:.4f}")
-    print(classification_report(y_test, y_pred, target_names=["Not Chronic", "Chronic"]))
-    print(f"  Confusion matrix:\n{confusion_matrix(y_test, y_pred)}")
+    report = classification_report(y_test, y_pred, target_names=["Not Chronic", "Chronic"], output_dict=True)
+    report_text = classification_report(y_test, y_pred, target_names=["Not Chronic", "Chronic"])
+    cm = confusion_matrix(y_test, y_pred)
+    print(f"  Confusion matrix:\n{cm}")
+
+    # Plot and save confusion matrix as PNG
+    plt.figure(figsize=(5,4))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=["Not Chronic", "Chronic"], yticklabels=["Not Chronic", "Chronic"])
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.title('Confusion Matrix')
+    plt.tight_layout()
+    plt.savefig('youth_chronic_xgboost_confusion_matrix.png')
+    plt.close()
+    print("  Saved confusion matrix plot as youth_chronic_xgboost_confusion_matrix.png")
+
+    # Plot and save classification report as PNG
+    fig, ax = plt.subplots(figsize=(7, 3))
+    ax.axis('off')
+    table_data = []
+    for label in ["Not Chronic", "Chronic", "accuracy", "macro avg", "weighted avg"]:
+        if label in report:
+            row = [label]
+            if label == "accuracy":
+                row += ["", f"{report['accuracy']:.2f}", "", ""]
+            else:
+                row += [f"{report[label]['precision']:.2f}", f"{report[label]['recall']:.2f}", f"{report[label]['f1-score']:.2f}", f"{report[label]['support']:.0f}"]
+            table_data.append(row)
+    col_labels = ["", "Precision", "Recall", "F1-score", "Support"]
+    table = ax.table(cellText=table_data, colLabels=col_labels, loc='center', cellLoc='center')
+    table.auto_set_font_size(False)
+    table.set_fontsize(10)
+    table.scale(1.2, 1.2)
+    plt.title('Classification Report')
+    plt.tight_layout()
+    plt.savefig('youth_chronic_xgboost_classification_report.png')
+    plt.close()
+    print("  Saved classification report plot as youth_chronic_xgboost_classification_report.png")
+
+    # Plot and save ROC-AUC as PNG (text)
+    fig, ax = plt.subplots(figsize=(4, 1.5))
+    ax.axis('off')
+    ax.text(0.5, 0.5, f'ROC-AUC: {auc:.4f}', fontsize=14, ha='center', va='center')
+    plt.tight_layout()
+    plt.savefig('youth_chronic_xgboost_roc_auc.png')
+    plt.close()
+    print("  Saved ROC-AUC plot as youth_chronic_xgboost_roc_auc.png")
 
     importances = sorted(
         zip(feature_cols, xgb.feature_importances_),
@@ -266,7 +300,7 @@ def main():
                         help=f"Target column (default: {DEFAULT_TARGET}). Derived from HUD definition if absent.")
     parser.add_argument("--out-model", default="youth_chronic_xgboost.pkl",
                         help="Output pkl path")
-    parser.add_argument("--test-size", type=float, default=0.2)
+    parser.add_argument("--test-size", type=float, default=0.3)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--list-cols", action="store_true",
                         help="Print expected columns and exit")
