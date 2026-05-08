@@ -5,11 +5,6 @@ Trains an XGBoost binary classifier to predict chronic homelessness
 using Ottawa SASM intake fields. Handles mixed numeric/categorical data
 via label encoding and median imputation.
 
-NOTE: This dataset does not have a youth column — all records are used.
-      The target is derived from duration_homeless_past_year and
-      episodes_homeless_past_year per HUD chronic homelessness definition,
-      OR read directly from a "chronic_homeless" column if present.
-
 Usage
 -----
   python youth_chronic_xgboost.py data.csv
@@ -47,6 +42,7 @@ from xgboost import XGBClassifier
 # For plotting
 import matplotlib.pyplot as plt
 import seaborn as sns
+import shap
 
 warnings.filterwarnings("ignore")
 
@@ -256,6 +252,51 @@ def train(path, target_col, out_model, test_size, seed):
     print("\n  Feature importances (top 10):")
     for feat, imp in importances[:10]:
         print(f"    {feat:<35s} {imp:.4f}")
+
+    # Plot and save feature importance as PNG
+    imp_sorted = sorted(zip(feature_cols, xgb.feature_importances_), key=lambda x: x[1])
+    feats, vals = zip(*imp_sorted)
+    colors = ["#1D9E75" if v > 0.1 else "#378ADD" if v > 0.03 else "#888780" for v in vals]
+    fig, ax = plt.subplots(figsize=(8, len(feats) * 0.45 + 1.2))
+    bars = ax.barh(feats, vals, color=colors, height=0.6)
+    for bar, val in zip(bars, vals):
+        ax.text(bar.get_width() + 0.003, bar.get_y() + bar.get_height() / 2,
+                f"{val:.1%}", va="center", ha="left", fontsize=9, color="#444")
+    ax.set_xlabel("Feature importance (XGBoost gain)", fontsize=10)
+    ax.set_title("Feature importance — youth chronic homelessness model", fontsize=11, pad=12)
+    ax.set_xlim(0, max(vals) * 1.18)
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.tick_params(labelsize=9)
+    legend_items = [plt.Rectangle((0,0),1,1,color=c) for c in ["#1D9E75","#378ADD","#888780"]]
+    ax.legend(legend_items, ["> 10%  (dominant)", "3–10%  (secondary)", "< 3%   (minor)"],
+              fontsize=8, loc="lower right", framealpha=0.6)
+    plt.tight_layout()
+    plt.savefig("youth_chronic_xgboost_feature_importance.png", dpi=150)
+    plt.close()
+    print("  Saved feature importance plot as youth_chronic_xgboost_feature_importance.png")
+
+    # ── SHAP analysis ─────────────────────────────────────────────────────────
+    print("\nComputing SHAP values ...")
+    explainer = shap.TreeExplainer(xgb)
+    shap_values = explainer.shap_values(X_test)
+
+    # Summary plot (beeswarm) — shows direction + magnitude per feature
+    plt.figure()
+    shap.summary_plot(shap_values, X_test, feature_names=feature_cols, show=False)
+    plt.title("SHAP summary — impact on chronic homelessness prediction", fontsize=11, pad=12)
+    plt.tight_layout()
+    plt.savefig("youth_chronic_xgboost_shap_summary.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    print("  Saved SHAP summary plot as youth_chronic_xgboost_shap_summary.png")
+
+    # Bar plot — mean absolute SHAP value per feature (global importance)
+    plt.figure()
+    shap.summary_plot(shap_values, X_test, feature_names=feature_cols, plot_type="bar", show=False)
+    plt.title("SHAP mean absolute importance", fontsize=11, pad=12)
+    plt.tight_layout()
+    plt.savefig("youth_chronic_xgboost_shap_bar.png", dpi=150, bbox_inches="tight")
+    plt.close()
+    print("  Saved SHAP bar plot as youth_chronic_xgboost_shap_bar.png")
 
     bundle = {
         "xgb":              xgb,
