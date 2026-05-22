@@ -8,3 +8,7 @@ matplotlib
 xgboost
 seaborn
 shap
+torch
+torch.nn
+torch.nn.functional
+torch.utils.data
