@@ -1,6 +1,6 @@
-# Homeless Synthetic Data Pipeline
+# RBC Borealis X United Way East Ontario - Chronic Homeless Predictor
 
-This project loads Toronto SNA data, calibrates it with shelter-flow data, generates synthetic records, and trains a forecast model.
+This is the backend and model for the chronic homeless predictor. It uses the Toronto SNA data, (calibrates it with shelter-flow data???? - ANYA CHECK), extrapolates from the data, and trains a predictor model. It also tests the Lanark County data by extrapolating the missing features.
 
 ## Setup
 
@@ -10,6 +10,74 @@ This project loads Toronto SNA data, calibrates it with shelter-flow data, gener
 ```bash
 py -m pip install -r requirements.txt
 ```
+
+## Generate Toronto SNA data
+
+ANYA DO THIS
+
+## Run model
+
+This is model that predicts whether an individual will become chronically homeless from the Toronto SNA data.
+
+Run with:
+- `python final/new_no_year.py synthetic_data/synthetic_individuals.csv`
+
+Outputs:
+- `youth_no_year_confusion_matrix.png`
+- `youth_no_year_features_importance.png`
+- `youth_no_year_roc_curve.png`
+- `youth_no_year_shap_summary.png`
+
+## Predict on Lanark
+
+Run this in terminal to generate the missing features for the Lanark County Data
+```
+python final/generate_model_csv.py \
+        --bnl  final/new_lanark.csv \
+        --syn  synthetic_data/synthetic_individuals.csv \
+        --out  final/new_output.csv
+```
+
+It outputs `new_output.csv` which is the new Lanark County Data with the required features for the model.
+
+Now run 
+`python final/predict_bnl_no_year.py --bnl final/new_output.csv --model final/youth_xgboost_no_year.pkl --all-ages`
+to verify the model on the Lanark County data
+
+which outputs
+- `bnl_confusion_matrix.png`
+- `bnl_feature_importance.png`
+- `bnl_roc_curve.png`
+- `bnl_shap_bar.png`
+- `bnl_shap_summary.png`
+- `bnl_predictions.csv`
+
+## Old versions
+
+youth folder
+
+old folder
+
+merge folder
+
+
+## Project structure
+
+- `synthetic_data/synthetic_individuals.csv`: Toronto SNA extrapolated data
+- 
+
+
+- `sna_pipeline.py`: orchestration and SNA loading/interpolation
+- `shelter_flow.py`: shelter flow loading + calibration
+- `generation/synthetic_generation.py`: synthetic individual and region-year feature generation
+- `training/forecast_training.py`: model training and forecasting
+- `source_data/`: local input files
+- `synthetic_data/`: generated outputs
+
+
+
+
+
 
 ## Commands
 
@@ -81,12 +149,3 @@ Outputs:
 - `synthetic_data/validation/forecast_vs_flow.png`
 - `synthetic_data/validation/validation_mae_by_metric.png`
 - `synthetic_data/validation/validation_corr_by_metric.png`
-
-## Project structure
-
-- `sna_pipeline.py`: orchestration and SNA loading/interpolation
-- `shelter_flow.py`: shelter flow loading + calibration
-- `generation/synthetic_generation.py`: synthetic individual and region-year feature generation
-- `training/forecast_training.py`: model training and forecasting
-- `source_data/`: local input files
-- `synthetic_data/`: generated outputs
